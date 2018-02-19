@@ -1,1 +1,12 @@
 @import '~bootstrap/scss/bootstrap';
+
+.btn-accueil{
+  width: 300px;
+  margin-top: 50px;
+  margin-left: 200px;
+  border: solid black;
+  text-align: center;
+  display: inline-block;
+  line-height: 50px;
+  cursor: pointer
+}

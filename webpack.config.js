@@ -13,8 +13,7 @@ Encore
     // uncomment to define the assets of the project
     .addEntry('js/app', './assets/js/app.js')
     .addStyleEntry('css/app', './assets/css/app.scss')
-    .addEntry('image1', './assets/images/753756.png')
-    .addEntry('image2', './assets/images/chatlicorne.jpg')
+    .addEntry('logo', './assets/images/retrogaming-logo.jpg')
 
 
 

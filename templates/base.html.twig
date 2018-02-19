@@ -8,9 +8,7 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.3/js/all.js"></script>
     {% block stylesheets %}{% endblock %}
 </head>
-<body style="background: url({{ asset("build/images/753756.bdbf593c.png") }})">
 <nav class="navbar navbar-expand-sm navbar-dark" style="background-color: darkblue">
-    <img src="{{ asset("build/images/753756.bdbf593c.png") }}" style="width: 20px;height: 20px;"/>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
             aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -49,6 +47,9 @@
         </div>
     </div>
 </nav>
+<div style="text-align: center; margin-top: 20px">
+    <img src="{{ asset("build/images/retrogaming-logo.491dc787.jpg") }}"/>
+</div>
 {% block body %}{% endblock %}
 {% block javascripts %}{% endblock %}
 <script src="{{ asset("build/js/app.js") }}"></script>
