@@ -4,3 +4,36 @@
 #        - App\Entity\Product
 #        - App\Entity\Category
 #        - App\Entity\User
+easy_admin:
+    design:
+        form_theme: 'horizontal'
+
+        menu:
+            - label: 'Utilisateurs'
+            - { entity: 'User', icon: 'users'}
+
+            - label: 'Liens éditeur'
+            - {label: Symfony,url: "hhtps://symfony.com/", target: "_blank", icon: "thumbs-o-up"}
+
+            - label: 'Liens internes'
+            - {label: 'Notre site', route: "Accueil", icon: "calendar"}
+    entities:
+        User:
+            class: App\Entity\User
+            list:
+                title: "Liste des utilisateurs"
+                fields:
+                    - {property: 'user_name',type: 'text'}
+                    - {property: 'password'}
+                    - {property: 'is_active', type: 'toggle'}
+                    - {property: 'email', type: 'email'}
+                    - {property: 'role'}
+            form:
+                title: "Ajout d'un utilisateur"
+
+                fields:
+                    - {property: 'user_name',type: 'text'}
+                    - {property: 'password'}
+                    - {property: 'is_active', type: 'checkbox'}
+                    - {property: 'email', type: 'email'}
+                    - { property: 'role', type: 'choice', type_options:{choices: {'Utilisateur':'ROLE_USER', 'Admin':'ROLE_ADMIN'}}}

@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html class="normal-cursor">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}Accueil{% endblock %}</title>
     <link rel="stylesheet" href="{{ asset("build/css/app.css") }}" type="text/css"/>
+    <script src="{{ asset("build/js/app.js") }}"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.3/js/all.js"></script>
     {% block stylesheets %}{% endblock %}
 </head>
@@ -17,30 +18,25 @@
     <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="/Accueil"><i class="fa fa-home"></i><span class=""> Accueil</span></a>
+                <a class="nav-link link-cursor" href="/Accueil"><i class="fa fa-home"></i><span class=""> Accueil</span></a>
             </li>
         </ul>
         <div class="navbar-nav pull-right col-1">
-            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                <div class="dropdown  ">
-                    <button class="sr-only">Logged in as</button>
-                </div>
-            {% endif %}
             <li class="nav-item dropdown pull-right">
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                <a class="nav-link dropdown-toggle link-cursor" data-toggle="dropdown" href="#" role="button"
                    aria-haspopup="true" aria-expanded="false">
                     <i class="hidden-xs fas fa-users fa-2x"></i></a>
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Mon profil</a>
+                    <a class="dropdown-item link-cursor" href="#">Mon profil</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Se déconnecter</a>
+                    <a class="dropdown-item link-cursor" href="/deconnexion">Se déconnecter</a>
                 </div>
                 {% else %}
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Se connecter</a>
+                    <a class="dropdown-item link-cursor" href="/Connexion">Se connecter</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">S'inscrire</a>
+                    <a class="dropdown-item link-cursor" href="#">S'inscrire</a>
                 </div>
             </li>
             {% endif %}
@@ -48,13 +44,10 @@
     </div>
 </nav>
 <div style="text-align: center; margin-top: 20px">
-    <img src="{{ asset("build/images/retrogaming-logo.491dc787.jpg") }}"/>
+    <img src="{{ asset("images/retrogaming-logo.jpg") }}"/>
 </div>
-{% block body %}{% endblock %}
+{% block body %}
+{% endblock %}
 {% block javascripts %}{% endblock %}
-<script src="{{ asset("build/js/app.js") }}"></script>
-<script>$(document).ready(function () {
-        console.log("test");
-    })</script>
 </body>
 </html>

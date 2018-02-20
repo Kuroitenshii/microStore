@@ -1,18 +1,36 @@
 security:
-    # https://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:
-        in_memory: { memory: ~ }
+        mysql:
+            entity:
+                class: App\Entity\User
+                property: userName
+
+    encoders:
+        App\Entity\User:
+            algorithm: bcrypt   #algo de chiffrement
+            encode_as_base64: false
+            iterations: 13
+
     firewalls:
-        dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
-            security: false
+
         main:
-            anonymous: ~
+            anonymous: true
+            pattern: ^/
+            form_login:
+                login_path: Connexion   #route vers login
 
-            # activate different ways to authenticate
+                check_path: Connexion   #route qui va vérifier que le login est ok ou pas
+                default_target_path: Accueil
 
-            # http_basic: ~
-            # https://symfony.com/doc/current/book/security.html#a-configuring-how-your-users-will-authenticate
+            provider: mysql   #les données proviennent de mysql (def ci dessus)
 
-            # form_login: ~
-            # https://symfony.com/doc/current/cookbook/security/form_login_setup.html
+            logout:
+                path:   /deconnexion   #route de deconnexion
+                target: /Accueil         #la deconnexion redirige vers
+
+    role_hierarchy:
+        ROLE_ADMIN: ROLE_USER     #deux roles pris en comptes, admin > user
+
+    access_control:               #contrôle d'accès
+        - { path: ^/admin, roles: ROLE_ADMIN}
+

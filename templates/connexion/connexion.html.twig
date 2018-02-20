@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Connexion
+{% endblock title %}
+{% block body %}
+    {% if error %}
+        <div xmlns="http://www.w3.org/1999/html">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+    <form action="{{ path('Connexion') }}" method="post" class="bubble-speech bubble-center" style="text-align: center; padding: 10px">
+        <label for="username" class="normal-cursor">Identifiant :</label></br>
+        <input class="text-cursor" type="text" id="username" name="_username" value="{{ last_username }}" /></br></br>
+
+        <label for="password" class="normal-cursor">Mot de passe :</label></br>
+        <input class="text-cursor" type="password" id="password" name="_password" /></br></br>
+
+        <button type="submit" class="link-cursor btn btn-success">Connexion</button>
+        <button type="reset" class="link-cursor btn btn-danger">Supprimer</button>
+    </form>
+{% endblock body %}

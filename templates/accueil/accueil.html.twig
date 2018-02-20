@@ -1,26 +1,51 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-    <div class="btn-accueil" id="boutique">
-        <i class="fa fa-gamepad fa-3x"></i>
-        <p><strong> Boutique</strong></p>
+    <div class="btn-accueil">
+        <div class="link-cursor bubble-speech bubble-center" id="boutique">
+            <i class="fa fa-gamepad fa-3x author"></i>
+            <p><strong> Boutique</strong></p>
+        </div>
     </div>
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-        <div class="btn-accueil" id="panier">
-            <i class="fa fa-shopping-cart fa-3x"></i>
-            <p><strong> Panier</strong></p>
+        <div class="btn-accueil">
+            <div class="link-cursor bubble-speech bubble-center" id="panier">
+                <i class="fa fa-shopping-cart fa-3x author"></i>
+                <p><strong> Panier</strong></p>
+            </div>
         </div>
-        <div class="btn-accueil" id="compte">
-            <i class="fa fa-user-circle fa-3x"></i>
-            <p><strong> Mon Compte</strong></p>
+        <div class="btn-accueil">
+            <div class="link-cursor bubble-speech bubble-center" id="compte">
+                <i class="fa fa-user-circle fa-3x author"></i>
+                <p><strong> Mon Compte</strong></p>
+            </div>
         </div>
     {% else %}
-        <div class="btn-accueil" id="connexion">
-            <i class="fa fa-user fa-3x"></i>
-            <p><strong> Connexion</strong></p>
+        <div class="btn-accueil">
+            <div class="link-cursor bubble-speech bubble-center" id="connexion">
+                <i class="fa fa-user fa-3x author"></i>
+                <p><strong> Connexion</strong></p>
+            </div>
         </div>
-        <div class="btn-accueil" id="inscription">
-            <i class="fa fa-user-plus fa-3x"></i>
-            <p><strong> Inscription</strong></p>
+        <div class="btn-accueil">
+            <div class="link-cursor bubble-speech bubble-center" id="inscription">
+                <i class="fa fa-user-plus fa-3x author"></i>
+                <p><strong> Inscription</strong></p>
+            </div>
         </div>
     {% endif %}
+    <div class="btn-accueil">
+        <div class="link-cursor bubble-speech bubble-center" id="inscription">
+            <i class="fa fa-info-circle fa-3x author"></i>
+            <p><strong> A propos</strong></p>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        $(document).ready(function(){
+            $("#connexion").click(function(){
+                document.location.href="/Connexion"
+            })
+        })
+    </script>
 {% endblock %}

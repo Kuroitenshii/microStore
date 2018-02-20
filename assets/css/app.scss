@@ -3,10 +3,76 @@
 .btn-accueil{
   width: 300px;
   margin-top: 50px;
-  margin-left: 200px;
-  border: solid black;
-  text-align: center;
+  margin-left: 100px;
   display: inline-block;
-  line-height: 50px;
-  cursor: pointer
+  color: darkblue;
+}
+
+.link-cursor{
+  cursor: url("/cursor/You Got the Thing.cur"), pointer
+}
+
+.text-cursor{
+  cursor: url("/cursor/Text Select.cur"), text
+}
+
+.normal-cursor{
+  cursor: url("/cursor/Link - Normal Select.cur"), text;
+}
+
+.bubble-speech {
+  position: relative;
+  font-family: 'Source Sans Pro', sans-serif;
+  margin: auto;
+  line-height: 22px;
+  letter-spacing: 1px;
+  margin-top: 16px;
+  margin-bottom: 48px;
+  width: 300px;
+  background-color: darkgray;
+  padding: 16px;
+}
+
+.bubble-speech.bubble-left:after {
+  z-index: 9002;
+  display: block;
+  content: "";
+  position: absolute;
+  bottom: -11px;
+  left: 0;
+  border-top: 0 darkgray solid;
+  border-bottom: 12px transparent solid;
+  border-left: 20px #efefef solid;
+}
+
+.bubble-speech .author {
+  max-width: 200px;
+  font-weight: bold;
+  margin: 0;
+  padding: 0 12px 2px 0;
+}
+
+.bubble-speech.bubble-center:after {
+  z-index: 9002;
+  display: block;
+  content: "";
+  position: absolute;
+  bottom: -11px;
+  left: 50%;
+  margin-left: -18px;
+  border-right: 20px transparent solid;
+  border-top: 12px darkgrey solid;
+  border-left: 20px transparent solid;
+}
+
+.bubble-speech.bubble-right:after {
+  z-index: 9002;
+  display: block;
+  content: "";
+  position: absolute;
+  bottom: -11px;
+  right: 0;
+  border-top: 0 darkgrey solid;
+  border-bottom: 12px transparent solid;
+  border-right: 20px #efefef solid;
 }
