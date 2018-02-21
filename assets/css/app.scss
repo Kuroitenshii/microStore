@@ -9,7 +9,7 @@
 }
 
 .link-cursor{
-  cursor: url("/cursor/You Got the Thing.cur"), move
+  cursor: url("/cursor/You Got the Thing.cur"), pointer
 }
 
 .text-cursor{
@@ -96,6 +96,7 @@
   color:blue;
   position:relative;
   left:14px;
+  cursor: url("/cursor/You Got the Thing.cur"), pointer
 }
 
 .sgen tr td div{
@@ -106,13 +107,15 @@
   font-weight:bold;
   line-height:25px;
   background:url(/images/sbouton.png);
+  cursor: url("/cursor/You Got the Thing.cur"), pointer
 }
 
 .sgen tr td:hover{
   color:red;
+  cursor: url("/cursor/You Got the Thing.cur"), pointer
 }
 
-#secuid10{
+#password{
   display:block;
   margin:auto;
   width:130px;
@@ -137,4 +140,90 @@
 
 #secure{
   margin:10px auto;
+}
+
+.pixel {
+  width: 100px;
+  color: white;
+  font-family: Helvetica, Arial, Sans-Serif;
+  font-size: 14px;
+  text-decoration: none;
+  text-shadow: -1px -1px 1px #616161;
+  position: relative;
+  padding: 15px;
+  -webkit-box-shadow: 5px 5px 0 #666;
+  -moz-box-shadow: 5px 5px 0 #666;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  margin: 0 10px 0 0;
+}
+
+.pixel:hover {
+  -webkit-box-shadow: 0px 0px 0 #666;
+  -moz-box-shadow: 0px 0px 0 #666;
+  top: 5px;
+  left: 5px;
+}
+
+.form-style-1 {
+  margin:10px auto;
+  max-width: 400px;
+  padding: 20px 12px 10px 20px;
+  font: 13px "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+.form-style-1 li {
+  padding: 0;
+  display: block;
+  list-style: none;
+  margin: 10px 0 0 0;
+}
+.form-style-1 label{
+  margin:0 0 3px 0;
+  padding:0px;
+  display:block;
+  font-weight: bold;
+}
+.form-style-1 input[type=text],
+.form-style-1 input[type=date],
+.form-style-1 input[type=datetime],
+.form-style-1 input[type=number],
+.form-style-1 input[type=search],
+.form-style-1 input[type=time],
+.form-style-1 input[type=url],
+.form-style-1 input[type=email],
+textarea,
+select{
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  border:1px solid #BEBEBE;
+  padding: 7px;
+  margin:0px;
+  -webkit-transition: all 0.30s ease-in-out;
+  -moz-transition: all 0.30s ease-in-out;
+  -ms-transition: all 0.30s ease-in-out;
+  -o-transition: all 0.30s ease-in-out;
+  outline: none;
+}
+.form-style-1 input[type=text]:focus,
+.form-style-1 input[type=date]:focus,
+.form-style-1 input[type=datetime]:focus,
+.form-style-1 input[type=number]:focus,
+.form-style-1 input[type=search]:focus,
+.form-style-1 input[type=time]:focus,
+.form-style-1 input[type=url]:focus,
+.form-style-1 input[type=email]:focus,
+.form-style-1 textarea:focus,
+.form-style-1 select:focus{
+  -moz-box-shadow: 0 0 8px #88D5E9;
+  -webkit-box-shadow: 0 0 8px #88D5E9;
+  box-shadow: 0 0 8px #88D5E9;
+  border: 1px solid #88D5E9;
+}
+.form-style-1 .field-divided{
+  width: 49%;
+}
+
+.form-style-1 .field-long{
+  width: 100%;
 }

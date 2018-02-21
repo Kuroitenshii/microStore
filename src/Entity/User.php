@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Id\AbstractIdGenerator;
 use Symfony\Component\Security\Core\User\UserInterface;
-
+use Symfony\Component\Validator\Constraint as Assert;
 
 
 /**
@@ -34,6 +34,12 @@ class User implements UserInterface, \Serializable
     private $password;
 
 
+    /**
+     * @var string
+     * @Assert\NotBlank()
+     * @ORM\Column(name="pseudo", type="string", length=255, nullable=false)
+     */
+    private $pseudo;
 
     /**
      * @var string
@@ -44,7 +50,7 @@ class User implements UserInterface, \Serializable
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="mail", type="string", length=255, nullable=false)
      */
     private $email;
@@ -55,6 +61,32 @@ class User implements UserInterface, \Serializable
     public function __construct()
     {
     }
+
+    /**
+     * @return string
+     */
+    public function getPseudo()
+    {
+        return $this->pseudo;
+    }
+
+    /**
+     * @param string $pseudo
+     */
+    public function setPseudo(string $pseudo)
+    {
+        $this->pseudo = $pseudo;
+    }
+
+    public function generate()
+    {
+        $min_value = 100000;
+        $max_value = 999999;
+
+        return mt_rand($min_value, $max_value);
+    }
+
+
 
     /**
      * @return string

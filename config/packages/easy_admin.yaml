@@ -22,12 +22,14 @@ easy_admin:
                 fields:
                     - {property: 'user_name'}
                     - {property: 'password'}
+                    - {property: 'pseudo'}
                     - {property: 'email', type: 'email'}
                     - {property: 'role'}
             form:
                 title: "Ajout d'un utilisateur"
 
                 fields:
+                    - { property: 'pseudo', type: 'text'}
                     - {property: 'password', type: 'text'}
                     - {property: 'email', type: 'email'}
                     - { property: 'role', type: 'choice', type_options:{choices: {'Utilisateur':'ROLE_USER', 'Admin':'ROLE_ADMIN'}}}

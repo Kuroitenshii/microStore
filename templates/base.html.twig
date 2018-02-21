@@ -20,6 +20,13 @@
             <li class="nav-item active">
                 <a class="nav-link link-cursor" href="/Accueil"><i class="fa fa-home"></i><span class=""> Accueil</span></a>
             </li>
+            <li class="nav-item" style="color: white">
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <span>Connecter en tant que : {{ app.user.pseudo }}</span>
+                {% else %}
+                    <span>Non connecter</span>
+                {% endif %}
+            </li>
         </ul>
         <div class="navbar-nav pull-right col-1">
             <li class="nav-item dropdown pull-right">
@@ -31,12 +38,16 @@
                     <a class="dropdown-item link-cursor" href="#">Mon profil</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item link-cursor" href="/deconnexion">Se déconnecter</a>
+                    {% if (app.user.pseudo == "Admin") %}
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item link-cursor" href="/admin">Administration</a>
+                    {% endif %}
                 </div>
                 {% else %}
                 <div class="dropdown-menu">
                     <a class="dropdown-item link-cursor" href="/Connexion">Se connecter</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item link-cursor" href="#">S'inscrire</a>
+                    <a class="dropdown-item link-cursor" href="/Inscription">S'inscrire</a>
                 </div>
             </li>
             {% endif %}

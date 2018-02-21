@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    Inscription - Succès
+{% endblock %}
+{% block body %}
+    <div class="bubble-speech bubble-center">
+        <p>Inscription Réussi voici votre code client ainsi que votre mot de passe</p>
+        <p>ne les perdez pas</p>
+        <p>Code Client : <strong>{{ id }}</strong></p>
+        <p>Mot de passe : <strong>{{ password }}</strong></p>
+    </div>
+{% endblock %}
