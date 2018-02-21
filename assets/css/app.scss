@@ -5,11 +5,11 @@
   margin-top: 50px;
   margin-left: 100px;
   display: inline-block;
-  color: darkblue;
+  text-align: center;
 }
 
 .link-cursor{
-  cursor: url("/cursor/You Got the Thing.cur"), pointer
+  cursor: url("/cursor/You Got the Thing.cur"), move
 }
 
 .text-cursor{
@@ -42,7 +42,7 @@
   left: 0;
   border-top: 0 darkgray solid;
   border-bottom: 12px transparent solid;
-  border-left: 20px #efefef solid;
+  border-left: 20px darkgray solid;
 }
 
 .bubble-speech .author {
@@ -50,6 +50,10 @@
   font-weight: bold;
   margin: 0;
   padding: 0 12px 2px 0;
+}
+
+.btn btn-succees btn-danger{
+  cursor: url("/cursor/You Got the Thing.cur"), move
 }
 
 .bubble-speech.bubble-center:after {
@@ -74,5 +78,63 @@
   right: 0;
   border-top: 0 darkgrey solid;
   border-bottom: 12px transparent solid;
-  border-right: 20px #efefef solid;
+  border-right: 20px darkgray solid;
+}
+
+.sgen{
+  background:url(/images/plaque.png);
+  height:100px;width:250px;
+  margin:auto;
+  margin-top:50px;
+  border-style:solid;
+}
+
+.sgen tr td{
+  float:left;
+  list-style:none;
+  padding:5px;
+  color:blue;
+  position:relative;
+  left:14px;
+}
+
+.sgen tr td div{
+  height:30px;
+  width:60px;
+  text-align:center;
+  font-size:13px;
+  font-weight:bold;
+  line-height:25px;
+  background:url(/images/sbouton.png);
+}
+
+.sgen tr td:hover{
+  color:red;
+}
+
+#secuid10{
+  display:block;
+  margin:auto;
+  width:130px;
+  text-align: center;
+}
+
+.divimage{
+  cursor:pointer;
+  text-align:center;
+  font-weight:bold;
+  color:blue;
+  font-size:14px;
+  height:40px;
+  width:40px;
+  background:url(/images/bout.png);
+
+}
+
+.divimage:hover{
+  opacity:0.7;
+}
+
+#secure{
+  margin:10px auto;
 }

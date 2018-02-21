@@ -3,7 +3,10 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Id\AbstractIdGenerator;
 use Symfony\Component\Security\Core\User\UserInterface;
+
+
 
 /**
  * User
@@ -17,23 +20,20 @@ class User implements UserInterface, \Serializable
      * @ORM\Id
      * @var string
      *
-     * @ORM\Column(name="id", type="string", length=255, nullable=false)
+     * @ORM\Column(name="id", type="integer", nullable=false, unique=true)
+     * @ORM\GeneratedValue(strategy="CUSTOM")
+     * @ORM\CustomIdGenerator(class="App\Doctrine\RandomIdGenerator")
      */
     private $userName;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="mdp", type="string", length=255, nullable=false)
+     * @ORM\Column(name="mdp", type="string", length=6, nullable=false)
      */
     private $password;
 
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="active", type="boolean")
-     */
-    private $isActive;
+
 
     /**
      * @var string
@@ -56,21 +56,12 @@ class User implements UserInterface, \Serializable
     {
     }
 
-
     /**
      * @return string
      */
     public function getUserName()
     {
         return $this->userName;
-    }
-
-    /**
-     * @param string $userName
-     */
-    public function setUserName(string $userName)
-    {
-        $this->userName = $userName;
     }
 
     /**
@@ -86,24 +77,9 @@ class User implements UserInterface, \Serializable
      */
     public function setPassword(string $password)
     {
-        $this->password = password_hash($password,PASSWORD_BCRYPT,array("cost"=>13));
+        $this->password = $password;
     }
 
-    /**
-     * @return bool
-     */
-    public function isActive()
-    {
-        return $this->isActive;
-    }
-
-    /**
-     * @param bool $isActive
-     */
-    public function setIsActive(bool $isActive)
-    {
-        $this->isActive = $isActive;
-    }
 
     /**
      * @return string

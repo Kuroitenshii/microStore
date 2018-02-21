@@ -3,18 +3,85 @@
 {% block title %}
     Connexion
 {% endblock title %}
+{% block stylesheets %}
+    <script>
+
+        tbimage = new Array(1, 2, 3, 4, 5, 6, 7, 8, 9, 0)
+
+        function securi() {
+
+            document.getElementById('password').value = ''
+            var allElements = document.getElementById('secure').getElementsByTagName('td');
+
+            for (var i = 0; i < allElements.length; i++) {
+
+                if (tbimage.length == 1) {
+                    allElements[i].firstChild.nodeValue = tbimage[0]
+                }
+                else {
+                    var spl = Math.round(Math.random() * (tbimage.length - 1))
+                    allElements[i].firstChild.nodeValue = tbimage[spl]
+                    tbimage.splice(spl, 1)
+                }
+                var dd = 'secuid' + i + ''
+                allElements[i].id = dd
+                allElements[i].onmouseover = function (event) {
+                    parde(event)
+                };
+                allElements[i].onmouseout = finparde
+            }
+        }
+
+        function inval(lui) {
+            var obja = document.getElementById('password')
+            obja.value = obja.value + document.getElementById(lui).firstChild.nodeValue
+        }
+
+        function parde(lui) {
+            var di = (navigator.appName.substring(0, 3) == "Mic") ? event.srcElement.id : lui.currentTarget.id
+            terin = setTimeout("inval('" + di + "')", 1000)
+        }
+
+        function finparde() {
+            clearTimeout(terin)
+        }
+
+        function roze() {
+            document.getElementById("password").value = ''
+        }
+    </script>
+{% endblock %}
 {% block body %}
+    <body onload="securi()">
     {% if error %}
-        <div xmlns="http://www.w3.org/1999/html">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        <div style="text-align: center; color: red"><p>identifiant ou mot de passe invalide</p></div>
     {% endif %}
-    <form action="{{ path('Connexion') }}" method="post" class="bubble-speech bubble-center" style="text-align: center; padding: 10px">
-        <label for="username" class="normal-cursor">Identifiant :</label></br>
-        <input class="text-cursor" type="text" id="username" name="_username" value="{{ last_username }}" /></br></br>
+    <form action="{{ path('Connexion') }}" method="post" class="bubble-speech bubble-center" style="text-align: center">
+        <label for="username" class="normal-cursor">Inserer votre numéro de client :</label></br>
+        <input class="text-cursor" type="text" id="username" name="_username" value="{{ last_username }}"/></br></br>
 
-        <label for="password" class="normal-cursor">Mot de passe :</label></br>
-        <input class="text-cursor" type="password" id="password" name="_password" /></br></br>
+        <label for="password" class="normal-cursor">insérer votre mot de passe (6 chiffres) a l'aide du pavé virtuel (inutile de cliquer):</label></br>
+        <input type='password' readonly='true' id='password' name="_password"/>
 
-        <button type="submit" class="link-cursor btn btn-success">Connexion</button>
-        <button type="reset" class="link-cursor btn btn-danger">Supprimer</button>
+        <div class='sgen' style=";">
+            <table id='secure'>
+                <tr>
+                    <td class='divimage'>titre</td>
+                    <td class='divimage'>titre</td>
+                    <td class='divimage'>titre</td>
+                    <td class='divimage'>titre</td>
+                    <td class='divimage'>titre</td>
+                </tr><tr>
+                    <td class='divimage'>titre</td>
+                    <td class='divimage'>titre</td>
+                    <td class='divimage'>titre</td>
+                    <td class='divimage'>titre</td>
+                    <td class='divimage'>titre</td>
+                </tr>
+            </table>
+            </div></br></br>
+
+        <button type="submit" class="btn btn-success">Connexion</button>
+        <button type="reset" class="btn btn-danger">Supprimer</button>
     </form>
 {% endblock body %}
