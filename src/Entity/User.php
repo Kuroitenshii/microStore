@@ -36,7 +36,6 @@ class User implements UserInterface, \Serializable
 
     /**
      * @var string
-     * @Assert\NotBlank()
      * @ORM\Column(name="pseudo", type="string", length=255, nullable=false)
      */
     private $pseudo;
@@ -50,7 +49,6 @@ class User implements UserInterface, \Serializable
 
     /**
      * @var string
-     * @Assert\NotBlank()
      * @ORM\Column(name="mail", type="string", length=255, nullable=false)
      */
     private $email;

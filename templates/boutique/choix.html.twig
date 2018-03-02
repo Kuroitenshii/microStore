@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    Boutique
+{% endblock %}
+{% block navAcuueil %}
+{% endblock %}
+{% block navBoutique %}
+    active
+{% endblock %}
+{% block body %}
+    <div style="text-align: center">
+        <div class="link-cursor bubble-speech bubble-center rotate div-bouton" id="salon"
+             style="color: blue; border-color: blue; margin-left: 0%">
+            <i class="fa fa-gamepad fa-3x author" style="color: blue;"></i>
+            <p><strong>Console de Salon</strong></p>
+        </div>
+        <div class="link-cursor bubble-speech bubble-center rotate div-bouton" id="portable"
+             style="color: green; border-color: green">
+            <i class="fa fa-mobile-alt fa-3x author" style="color: green;"></i>
+            <p><strong>Console Portable</strong></p>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        $(document).ready(function(){
+            $("#salon").click(function(){
+                location.href = "/Boutique/console-de-salon";
+            })
+            $("#portable").click(function(){
+                location.href = "/Boutique/console-portable";
+            })
+        })
+    </script>
+{% endblock %}

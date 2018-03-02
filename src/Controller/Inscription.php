@@ -17,6 +17,7 @@ use Symfony\Component\Form\Extension\Core\Type\ResetType;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 
 class Inscription extends AbstractController{

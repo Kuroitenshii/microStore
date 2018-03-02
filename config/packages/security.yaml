@@ -30,4 +30,6 @@ security:
 
     access_control:               #contrôle d'accès
         - { path: ^/admin, roles: ROLE_ADMIN}
+        - { path: ^/Boutique/Ajout, roles: ROLE_USER}
+        - { path: ^/Panier, roles: ROLE_USER}
 

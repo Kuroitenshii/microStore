@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    Panier
+{% endblock %}
+{% block navAcuueil %}
+{% endblock %}
+{% block navBoutique %}
+{% endblock %}
+{% block navPanier %}
+    active
+{% endblock %}
+{% block body %}
+    <div style="text-align: center; margin-bottom: 15px">
+        <div class="link-cursor bubble-speech bubble-center div-bouton" id="salon"
+             style="color: blue; border-color: blue; margin-left: 0%; font-size: 25pt">
+            <i class="fa fa-shopping-basket fa-2x author" style="color: blue;"></i>
+            <p><strong>Panier</strong></p>
+        </div>
+        <table class="panier">
+            <thead>
+            <tr>
+                <th>Référence</th>
+                <th>Nom</th>
+                <th>Prix Unitaire</th>
+                <th>Quantité</th>
+                <th>Prix Total</th>
+                <th>Ajout / Retrait</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for element in panier %}
+                <tr>
+                    <td>{{ element.ref }}</td>
+                    <td>{{ element.nom }}</td>
+                    <td>{{ element.prix }}</td>
+                    <td>{{ element.quantite }}</td>
+                    <td>{{ element.total }}</td>
+                    <td></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        $(document).ready(function () {
+            $("#ajout").click(function () {
+                $.ajax({
+                    url: '/Boutique/Ajout',
+                    method: "post",
+                    data: "ref=" + document.getElementById("ajout").getAttribute("name"),
+                    success: function (data) {
+                        console.log(data);
+                    }
+                })
+            })
+        })
+    </script>
+{% endblock %}

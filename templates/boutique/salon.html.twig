@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    Boutique console de salon
+{% endblock %}
+{% block navAcuueil %}
+{% endblock %}
+{% block navBoutique %}
+    active
+{% endblock %}
+{% block body %}
+    {% for key, uneConsole in console %}
+        <div style="text-align: center; margin-bottom: 15px">
+            <div class="link-cursor bubble-speech bubble-center div-bouton" id="salon"
+                 style="color: blue; border-color: blue; margin-left: 0%; font-size: 25pt">
+                <i class="fa fa-gamepad fa-3x author" style="color: blue;"></i>
+                <p><strong>Console de Salon</strong></p>
+            </div>
+        </div>
+        <div class="normal-cursor bubble-speech bubble-center div-bouton" id="boutique"
+             style="color: blue; height: 550px">
+            <p><img src="data:image/png;base64,{{ imageF[key] }}" style="max-width: 100px; height: 30px"/><strong
+                        style="margin-left: 40px">{{ uneConsole.nom }}</strong>
+            </p>
+            <img src="data:image/png;base64,{{ imageC[key] }}"
+                 style="height: 270px; width: 270px; margin-bottom: 10px"/>
+            {% if etat[key] == "Rupture de stock" %}
+                <p style="color: red"><strong><h4>{{ etat[key] }}</h4></strong></p>
+                <a href="#" class="pixel link-cursor" style="background-color: blue">Détail<i
+                            class="fa fa-info-circle fa-3x author"
+                            style="color: white; margin-left: 10px; padding-top: 20px; margin-right: -15px"></i></a></br></br>
+
+                <span class="pixel" style="background-color: grey">Ajouter au panier<i
+                            class="fa fa-plus-circle fa-3x author"
+                            style="color: white; margin-left: 10px; padding-top: 20px; margin-right: -15px"></i></span>
+            {% else %}
+                <p style="color: red"><strong><h4>{{ etat[key] }} €</h4></strong></p>
+                <a href="#" class="pixel link-cursor" style="background-color: blue">Détail<i
+                            class="fa fa-info-circle fa-3x author"
+                            style="color: white; margin-left: 10px; padding-top: 20px; margin-right: -15px"></i></a></br></br>
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <button id="ajout" name="{{ uneConsole.ref }}" class="pixel link-cursor button"
+                            style="background-color: green; color: white; padding-top: 0px">Ajouter au panier<i
+                                class="fa fa-plus-circle fa-3x author"
+                                style="color: white; margin-left: 10px; padding-top: 20px; margin-right: -15px"></i>
+                    </button>
+                {% else %}
+                    <a href="/Connexion" class="pixel hvr-float" style="background-color: green">Ajouter au panier<i
+                                class="fa fa-plus-circle fa-3x author"
+                                style="color: white; margin-left: 10px; padding-top: 20px; margin-right: -15px"></i></a>
+                {% endif %}
+            {% endif %}
+        </div>
+    {% endfor %}
+{% endblock %}
+{% block javascripts %}
+    <script>
+        $(document).ready(function () {
+            $("#ajout").click(function () {
+                $.ajax({
+                    url: '/Boutique/Ajout',
+                    method: "post",
+                    data: "ref="+document.getElementById("ajout").getAttribute("name")
+                })
+            })
+        })
+    </script>
+{% endblock %}
