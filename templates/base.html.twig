@@ -24,7 +24,7 @@
                 <a class="nav-link link-cursor" href="/Boutique"><i class="fa fa-shopping-cart"></i><span class="">Boutique</span></a>
             </li>
             <li class="nav-item {% block navPanier %}{% endblock %}">
-                <a class="nav-link link-cursor" href="/Panier"><i class="fa fa-shopping-basket"></i><span class="">Panier <span id="article"></span></span></a>
+                <a class="nav-link link-cursor" href="/Panier"><i class="fa fa-shopping-basket"></i><span class="">Panier <span id="article">({{ app.session.get('article') }})</span></span></a>
             </li>
         </ul>
         <ul class="navbar-nav mr-auto">
@@ -43,7 +43,9 @@
                     <i class="hidden-xs fas fa-users fa-2x"></i></a>
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 <div class="dropdown-menu">
-                    <a class="dropdown-item link-cursor" href="#">Mon profil</a>
+                    <a class="dropdown-item link-cursor" href="#">Mes commandes</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item link-cursor" href="/Panier">Mon Panier</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item link-cursor" href="/deconnexion">Se déconnecter</a>
                     {% if (app.user.pseudo == "Admin") %}
@@ -62,7 +64,7 @@
         </div>
     </div>
 </nav>
-<div id="egg"></div>
+<div id="egg" style="text-align: center"></div>
 <div style="text-align: center; margin-top: 20px" id="image">
     <img src="{{ asset("images/retrogaming-logo.jpg") }}" style="width: 950px; height: 350px"/>
 </div>
@@ -74,7 +76,7 @@
     $(document).ready(function () {
         $("#image").click(function () {
             document.getElementById("image").innerHTML = "";
-            document.getElementById("egg").innerHTML = "<table style=\"margin: auto; width:244px; background:#fff; border:1px solid #F3F3F3;\" cellspacing=\"0\" cellpadding=\"0\"><tr><td style=\"font-family:verdana; font-size:11px; color:#000; padding:5px 5px;\"><object classid=\"clsid:D27CDB6E-AE6D-11cf-96B8-444553540000\" codebase=\"http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,29,0\" width=\"640\" height=\"480\"><param name=\"movie\" value=\"http://www.jeuxclic.com/jeux/jeux-flash-2904.swf\"><param name=\"quality\" value=\"high\"></param><param name=\"menu\" value=\"false\"></param><embed src=\"http://www.jeuxclic.com/jeux/jeux-flash-2904.swf\" width=\"640\" height=\"480\" quality=\"high\" pluginspage=\"http://www.macromedia.com/go/getflashplayer\" type=\"application/x-shockwave-flash\" menu=\"false\"></embed></object></td></tr><tr><td style=\"font-family:verdana; font-size:11px; padding:5px 10px; border-top:1px solid #F3F3F3;\" align=\"center\"><strong><a href=\"http://www.jeuxclic.com/jeux.php?id=6629\" target=\"_blank\">Super Mario flash</a></strong> | <a href=\"http://www.jeuxclic.com/categorie-jeux.php?cat=jeux-plate-forme\" target=\"_blank\"></a> avec <a href=\"http://www.jeuxclic.com\" title=\"Jeux avec Jeuxclic.com\" target=\"_blank\">Jeuxclic.com</a></td></tr></table>";
+            document.getElementById("egg").innerHTML = "<iframe src=\"https://www.silvergames.com/fr/happy-wheels/iframe\" width=\"900\" height=\"500\" style=\"margin:0;padding:0;border:0\"></iframe>"
         })
     })
 </script>

@@ -2,6 +2,7 @@
 namespace App\Entity;
 
 
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -13,25 +14,25 @@ use Doctrine\ORM\Mapping as ORM;
 class Panier
 {
     /**
-     * @var \User
+     * @var User
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      * @ORM\ManyToOne(targetEntity="User", cascade={"all"})
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_client", referencedColumnName="id", onDelete="cascade")
+     *   @ORM\JoinColumn(name="id_client", referencedColumnName="id")
      * })
      */
     private $idClient;
 
     /**
-     * @var \Produits
+     * @var Produits
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      * @ORM\ManyToOne(targetEntity="Produits", cascade={"all"})
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="ref_produit", referencedColumnName="ref", onDelete="cascade")
+     *   @ORM\JoinColumn(name="ref_produit", referencedColumnName="ref")
      * })
      */
     private $refProduit;
@@ -51,7 +52,7 @@ class Panier
     }
 
     /**
-     * @return \User
+     * @return string
      */
     public function getIdClient()
     {
@@ -59,15 +60,15 @@ class Panier
     }
 
     /**
-     * @param \User $idClient
+     * @param User $idClient
      */
-    public function setIdClient(\User $idClient)
+    public function setIdClient(User $idClient)
     {
         $this->idClient = $idClient;
     }
 
     /**
-     * @return \Produits
+     * @return Produits
      */
     public function getRefProduit()
     {
@@ -75,9 +76,9 @@ class Panier
     }
 
     /**
-     * @param \Produits $refProduit
+     * @param Produits $refProduit
      */
-    public function setRefProduit(\Produits $refProduit)
+    public function setRefProduit(Produits $refProduit)
     {
         $this->refProduit = $refProduit;
     }

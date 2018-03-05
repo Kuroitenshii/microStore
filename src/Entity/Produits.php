@@ -71,7 +71,7 @@ class Produits
     private $imageFabricant;
 
     /**
-     * @var \Categorie
+     * @var Categorie
      *
      * @ORM\ManyToOne(targetEntity="Categorie")
      * @ORM\JoinColumns({
@@ -200,7 +200,7 @@ class Produits
     }
 
     /**
-     * @return \Categorie
+     * @return Categorie
      */
     public function getIdCategorie()
     {
@@ -208,9 +208,9 @@ class Produits
     }
 
     /**
-     * @param \Categorie $idCategorie
+     * @param Categorie $idCategorie
      */
-    public function setIdCategorie(\Categorie $idCategorie)
+    public function setIdCategorie(Categorie $idCategorie)
     {
         $this->idCategorie = $idCategorie;
     }
@@ -224,9 +224,9 @@ class Produits
     }
 
     /**
-     * @param blob $imageFabricant
+     * @param string $imageFabricant
      */
-    public function setImageFabricant(blob $imageFabricant)
+    public function setImageFabricant(string $imageFabricant)
     {
         $this->imageFabricant = $imageFabricant;
     }

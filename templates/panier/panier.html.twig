@@ -10,50 +10,115 @@
     active
 {% endblock %}
 {% block body %}
-    <div style="text-align: center; margin-bottom: 15px">
-        <div class="link-cursor bubble-speech bubble-center div-bouton" id="salon"
-             style="color: blue; border-color: blue; margin-left: 0%; font-size: 25pt">
-            <i class="fa fa-shopping-basket fa-2x author" style="color: blue;"></i>
-            <p><strong>Panier</strong></p>
+    {% if (app.session.get('article') == 0) %}
+        <div style="text-align: center; margin-bottom: 15px">
+            <div class="normal-cursor bubble-speech bubble-center div-bouton" id="salon"
+                 style="color: blue; border-color: blue; margin-left: 0%; font-size: 25pt">
+                <p><strong>Panier Vide</strong></p>
+            </div>
         </div>
-        <table class="panier">
-            <thead>
-            <tr>
-                <th>Référence</th>
-                <th>Nom</th>
-                <th>Prix Unitaire</th>
-                <th>Quantité</th>
-                <th>Prix Total</th>
-                <th>Ajout / Retrait</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for element in panier %}
+    {% else %}
+        <div style="text-align: center; margin-bottom: 15px">
+            <div class="normal-cursor bubble-speech bubble-center div-bouton" id="salon"
+                 style="color: blue; border-color: blue; margin-left: 0%; font-size: 25pt">
+                <strong><p style="margin-top: 10px; margin-bottom: 10px; font-size: 15pt; color: red">{{ info }}</p>
+                </strong>
+                <i class="fa fa-shopping-basket fa-2x author" style="color: blue;"></i>
+                <p><strong>Panier</strong></p>
+                <strong><p id="erreur"
+                           style="margin-top: 10px; margin-bottom: 10px; font-size: 15pt; color: white">{{ info2 }}</p></strong>
+            </div>
+            <table class="panier">
+                <thead>
                 <tr>
-                    <td>{{ element.ref }}</td>
-                    <td>{{ element.nom }}</td>
-                    <td>{{ element.prix }}</td>
-                    <td>{{ element.quantite }}</td>
-                    <td>{{ element.total }}</td>
-                    <td></td>
+                    <th>Référence</th>
+                    <th>Nom</th>
+                    <th>Prix Unitaire</th>
+                    <th>Quantité</th>
+                    <th>Prix Total</th>
+                    <th>Ajout / Retrait</th>
                 </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    </div>
+                </thead>
+                <tbody>
+                {% for element in panier %}
+                    <tr>
+                        <td>{{ element.ref }}</td>
+                        <td>{{ element.nom }}</td>
+                        <td>{{ element.prix }}</td>
+                        <td>{{ element.quantite }}</td>
+                        <td>{{ element.total }}</td>
+                        <td>
+                            <button id="ajout" name="{{ element.ref }}" class="pixel link-cursor button"
+                                    style="background-color: green; color: white; padding-top: 0px; width: 100px"><i
+                                        class="fa fa-plus-circle fa-3x author"
+                                        style="color: white;padding-top: 20px"></i>
+                            </button>
+                            <button id="retrait" name="{{ element.ref }}" class="pixel link-cursor button"
+                                    style="background-color: red; color: white; padding-top: 0px; width: 100px"><i
+                                        class="fa fa-times-circle fa-3x author"
+                                        style="color: white; padding-top: 20px;"></i>
+                            </button>
+                        </td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><strong>prix total (HT)</strong></td>
+                    <td>{{ tot }} €</td>
+                    <td>
+                        <button id="valider" class="pixel link-cursor button"
+                                style="background-color: green; color: white; padding-top: 0px; width: 150px"><span
+                                    style="font-size: 15pt">Valider</span><i
+                                    class="fa fa-check fa-3x author"
+                                    style="color: white; padding-top: 20px;"></i>
+                        </button>
+                        <button id="vider" class="pixel link-cursor button"
+                                style="background-color: red; color: white; padding-top: 0px; width: 150px"><span
+                                    style="font-size: 15pt">Vider</span><i
+                                    class="fa fa-times fa-3x author"
+                                    style="color: white; padding-top: 20px;"></i>
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
 {% endblock %}
 {% block javascripts %}
     <script>
         $(document).ready(function () {
-            $("#ajout").click(function () {
-                $.ajax({
-                    url: '/Boutique/Ajout',
-                    method: "post",
-                    data: "ref=" + document.getElementById("ajout").getAttribute("name"),
-                    success: function (data) {
-                        console.log(data);
-                    }
-                })
+            $("button").click(function () {
+                if (this.id == 'ajout') {
+                    $.ajax({
+                        url: '/Boutique/Ajout',
+                        method: "post",
+                        data: "ref=" + this.name+"&lieu=panier",
+                        success: function () {
+                            location.reload(true);
+
+                        }
+                    })
+                } else if (this.id == 'retrait') {
+                    $.ajax({
+                        url: '/Boutique/Retrait',
+                        method: "post",
+                        data: "ref=" + this.name,
+                        success: function (data) {
+                            location.reload(true);
+                        }
+                    })
+                } else if (this.id == "vider") {
+                    $.ajax({
+                        url: '/Panier/Vider',
+                        method: "post",
+                        success: function () {
+                            location.reload(true);
+                        }
+                    })
+                }
             })
         })
     </script>

@@ -8,6 +8,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Panier;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,7 +20,17 @@ class Accueil extends AbstractController
      * @Route("/Accueil",name="Accueil")
      * @return Response
      */
-    public function accueilController(){
+    public function accueilController(\Doctrine\ORM\EntityManagerInterface $em, SessionInterface $session){
+        if($this->getUser()){
+            $user = $this->getUser()->getUserName();
+            $articles = $em->getRepository(\App\Entity\Panier::class)->findBy(array('idClient' => $user));
+            $nb = 0;
+            foreach($articles as $article){
+                $nb += $article->getQuantiteProduit();
+            }
+            $session->remove('article');
+            $session->set('article', $nb);
+        }
         return $this->render('accueil/accueil.html.twig');
     }
 }

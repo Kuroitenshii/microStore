@@ -9,6 +9,7 @@
 namespace App\Controller;
 
 use App\Entity\Produits;
+use App\Entity\Stock;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\Entity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,6 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class Panier extends AbstractController
 {
@@ -23,23 +25,77 @@ class Panier extends AbstractController
      * @Route("/Panier",name="Panier")
      * @return Response
      */
-    public function accueilController(SessionInterface $session, EntityManagerInterface $em){
-        if($this->getUser() == NULL){
+    public function accueilController(SessionInterface $session, EntityManagerInterface $em)
+    {
+            if($session->has("info")){
+                $info2 = $session->get("info");
+                $session->remove("info");
+            } else {
+                $info2 = "";
+            }
+            $user = $this->getUser()->getUserName();
+            $info = "";
+            $change = 0;
+            $articles = $em->getRepository(\App\Entity\Panier::class)->findBy(array('idClient' => $user));
+            foreach ($articles as $article) {
+                $stock = $em->getRepository(Stock::class)->findOneBy(array("refProduit" => $article->getRefProduit()));
+                if ($stock->getQuantiteStock() < $article->getQuantiteProduit()) {
+                    $change += $article->getQuantiteProduit() - $stock->getQuantiteStock();
+                    $article->setQuantiteProduit($stock->getQuantiteStock());
+                    $em->flush();
+                }
+            }
+            if ($change != 0) {
+                $info = $change . " élément(s) retiré (stock insuffisant)";
+            }
+
+
+            $articles = $em->getRepository(\App\Entity\Panier::class)->findBy(array('idClient' => $user));
+            $nb = 0;
+            foreach ($articles as $article) {
+                $nb += $article->getQuantiteProduit();
+            }
+            $session->remove('article');
+            $session->set('article', $nb);
+
             $panier = array();
-            $panierUser = $session->all();
             $i = 0;
-            foreach ($panierUser as $element){
-                $ref = array_keys($panierUser)[$i];
-                $ref= preg_replace('/\D/', '', $ref);
+            $tot = 0;
+            foreach ($articles as $element) {
+                $ref = $element->getRefProduit();
                 $detail = $em->getRepository(Produits::class)->findBy(array('ref' => $ref))[0];
                 $prix = $detail->getPrix();
-                $total = $prix * $element;
-                $panier[$ref] = array("ref" => $ref, "nom" => $detail->getNom(), "quantite" => $element, "prix" => $prix, "total" => $total);
-                $i ++;
+                $total = $prix * $element->getQuantiteProduit();
+                $tot += $total;
+                $panier[$i] = array("ref" => $detail->getRef(), "nom" => $detail->getNom(), "quantite" => $element->getQuantiteProduit(), "prix" => $prix, "total" => $total);
+                $i++;
             }
-        } else {
-            $panier = ""
-;        }
-        return $this->render('panier/panier.html.twig', array('panier' => $panier));
+        return $this->render('panier/panier.html.twig', array('panier' => $panier, 'tot' => $tot, 'info' => $info, 'info2' => $info2));
+    }
+
+    /**
+     * @Route("/Panier/Vider", name="Panier-vider")
+     */
+    public
+    function panierViderController(SessionInterface $session, Request $req, \Doctrine\ORM\EntityManagerInterface $em)
+    {
+        $user = $this->getUser()->getUserName();
+        $conn = $this->getDoctrine()->getConnection();
+
+        $sql = '
+        DELETE FROM panier
+        WHERE id_client =' . $user;
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+
+        $articles = $em->getRepository(\App\Entity\Panier::class)->findBy(array('idClient' => $user));
+        $nb = 0;
+        foreach ($articles as $article) {
+            $nb += $article->getQuantiteProduit();
+        }
+        $session->remove('article');
+        $session->set('article', $nb);
+
+        return new JsonResponse("");
     }
 }

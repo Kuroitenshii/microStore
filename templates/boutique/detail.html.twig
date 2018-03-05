@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    detail - {{ detail.nom }}
+{% endblock %}
+{% block navAcuueil %}
+{% endblock %}
+{% block navBoutique %}
+{% endblock %}
+{% block body %}
+    <div style="text-align: center; margin-bottom: 15px">
+        <div class="normal-cursor bubble-speech bubble-center div-bouton" id="salon"
+             style="color: blue; border-color: blue; margin-left: 0%; font-size: 25pt; width: 40%;">
+            <p><strong>Détail - {{ detail.nom }}</strong></p>
+        </div>
+    </div>
+    <div style="text-align: center; margin-bottom: 15px">
+        <div class="normal-cursor bubble-speech bubble-center div-bouton" id="salon"
+             style="color: blue; border-color: blue; margin-left: 0%; font-size: 25pt; width: 50%">
+            <p><strong>Nom : </strong>
+            <p>{{ detail.nom }}</p></p></br><img src="data:image/png;base64,{{ imageC }}"/></br></br>
+            {% if etat == "Rupture de stock" %}
+                <p><strong>{{ etat }}</strong><p></br>
+            {% else %}
+                <p><strong>Prix : </strong><p>{{ etat }} €</p></p></br>
+            {% endif %}
+            <p><strong>Fabricant : </strong>
+            <p>{{ detail.fabricant }}</p></p></br><img src="data:image/png;base64,{{ imageF }}"/></br></br>
+            <p><strong>Année de sortie : </strong>
+            <p>{{ detail.annee }}</p></p></br>
+            <p><strong>Description : </strong>
+            <p style="line-height: 30px">{{ detail.description }}</p></p></br>
+            {% if etat == "Rupture de stock" %}
+                <span class="pixel hvr-float" style="background-color: grey; width: 50%; font-size: 18pt">Ajouter au panier<i
+                            class="fa fa-plus-circle fa-2x author"
+                            style="color: white; margin-left: 10px; padding-top: 20px; margin-right: -15px"></i></span>
+            {% else %}
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <button id="ajout" name="{{ detail.ref }}" class="pixel link-cursor button"
+                            style="background-color: green; color: white; padding-top: 0px; width: 50%; font-size: 18pt">
+                        Ajouter au panier<i
+                                class="fa fa-plus-circle fa-2x author"
+                                style="color: white; margin-left: 10px; padding-top: 20px; margin-right: -15px"></i>
+                    </button>
+                {% else %}
+                    <a href="/Connexion" class="pixel hvr-float"
+                       style="background-color: green; width: 50%; font-size: 18pt">Ajouter au panier<i
+                                class="fa fa-plus-circle fa-2x author"
+                                style="color: white; margin-left: 10px; padding-top: 20px; margin-right: -15px"></i></a>
+                {% endif %}
+            {% endif %}
+            <strong><p id="fin-ajout" style="margin-top: 10px; margin-bottom: 10px; font-size: 18pt; color: white"></p>
+            </strong>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        $(document).ready(function () {
+            $("button").click(function () {
+                $.ajax({
+                    url: '/Boutique/Ajout',
+                    method: "post",
+                    data: "ref="+this.name,
+                    success: function(data){
+                        document.getElementById('fin-ajout').innerHTML = data;
+                    }
+                })
+            })
+        })
+    </script>
+{% endblock %}

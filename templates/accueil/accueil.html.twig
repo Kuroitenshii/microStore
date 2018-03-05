@@ -1,50 +1,48 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-    <div class="link-cursor bubble-speech bubble-center rotate div-bouton" id="boutique" style="color: blue; border-color: blue">
-        <i class="fa fa-gamepad fa-3x author" style="color: blue;"></i>
-        <p><strong>Boutique</strong></p>
-    </div>
-    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-        <div class="link-cursor bubble-speech bubble-center rotate div-bouton" id="panier"
-             style="color: orangered; border-color: orangered">
-            <i class="fa fa-shopping-cart fa-3x author" style="color: orangered;"></i>
-            <p><strong>Panier</strong></p>
+    <div style="text-align: center">
+        <div class="link-cursor bubble-speech bubble-center rotate div-bouton" id="boutique"
+             style="color: blue; border-color: blue; margin-left: 0px;">
+            <i class="fa fa-gamepad fa-3x author" style="color: blue;"></i>
+            <p><strong>Boutique</strong></p>
         </div>
-        <div class="link-cursor bubble-speech bubble-center rotate div-bouton" id="compte"
-             style="color: mediumorchid; border-color: mediumorchid">
-            <i class="fa fa-user-circle fa-3x author" style="color: mediumorchid"></i>
-            <p><strong>Mon Compte</strong></p>
-        </div>
-        {% if ( app.user.pseudo  == "Admin") %}
-            <div class="link-cursor bubble-speech bubble-center rotate div-bouton" id="propos"
-                 style="color: green; border-color: green">
-                <i class="fa fa-info-circle fa-3x author" style="color: green;"></i>
-                <p><strong>A propos</strong></p>
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <div class="link-cursor bubble-speech bubble-center rotate div-bouton" id="panier"
+                 style="color: orangered; border-color: orangered">
+                <i class="fa fa-shopping-cart fa-3x author" style="color: orangered;"></i>
+                <p><strong>Panier</strong></p>
             </div>
-
+            <div class="link-cursor bubble-speech bubble-center rotate div-bouton" id="commande"
+                 style="color: mediumorchid; border-color: mediumorchid">
+                <i class="fa fa-user-circle fa-3x author" style="color: mediumorchid"></i>
+                <p><strong>Mes Commandes</strong></p>
+            </div>
+            {% if ( app.user.role  == "ROLE_ADMIN") %}
+                <div class="link-cursor bubble-speech bubble-center rotate div-bouton" id="admin"
+                     style="color: green; border-color: green">
+                    <i class="fa fa-info-circle fa-3x author" style="color: green;"></i>
+                    <p><strong>Administration</strong></p>
+                </div>
+            {% else %}
+                <div class="link-cursor bubble-speech bubble-center rotate div-bouton" id="deconnexion"
+                     style="color: green; border-color: green">
+                    <i class="fa fa-info-circle fa-3x author" style="color: green;"></i>
+                    <p><strong>se deconnecter</strong></p>
+                </div>
+            {% endif %}
         {% else %}
-            <div class="link-cursor bubble-speech bubble-center rotate div-bouton" id="admin"
-                 style="color: green; border-color: green">
-                <i class="fa fa-info-circle fa-3x author" style="color: green;"></i>
-                <p><strong>Administration</strong></p>
+            <div class="link-cursor bubble-speech bubble-center rotate div-bouton" id="connexion"
+                 style="color: orangered; border-color: orangered">
+                <i class="fa fa-user fa-3x author" style="color: orangered;"></i>
+                <p><strong>Connexion</strong></p>
+            </div>
+            <div class="link-cursor bubble-speech bubble-center rotate div-bouton" id="inscription"
+                 style="color: mediumorchid; border-color: mediumorchid">
+                <i class="fa fa-user-plus fa-3x author" style="color: mediumorchid;"></i>
+                <p><strong>Inscription</strong></p>
             </div>
         {% endif %}
-    {% else %}
-        <div class="link-cursor bubble-speech bubble-center rotate div-bouton" id="connexion"
-             style="color: orangered; border-color: orangered">
-            <i class="fa fa-user fa-3x author" style="color: orangered;"></i>
-            <p><strong>Connexion</strong></p>
-        </div>
-        <div class="link-cursor bubble-speech bubble-center rotate div-bouton" id="inscription"
-             style="color: mediumorchid; border-color: mediumorchid">
-            <i class="fa fa-user-plus fa-3x author" style="color: mediumorchid;"></i>
-            <p><strong>Inscription</strong></p>
-        </div>
-        <div class="link-cursor bubble-speech bubble-center rotate div-bouton" id="propos" style="color: green; border-color: green">
-            <i class="fa fa-info-circle fa-3x author" style="color: green;"></i>
-            <p><strong>A propos</strong></p>
-        </div>
-    {% endif %}
+    </div>
 {% endblock %}
 {% block javascripts %}
     <script>
@@ -60,6 +58,12 @@
             })
             $("#boutique").click(function () {
                 document.location.href = "/Boutique"
+            })
+            $("#deconnexion").click(function () {
+                document.location.href = "/deconnexion"
+            })
+            $("#commande").click(function () {
+                document.location.href = "/Profil/Commande"
             })
         })
     </script>
