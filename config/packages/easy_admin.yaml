@@ -11,9 +11,20 @@ easy_admin:
         menu:
             - label: 'Utilisateurs'
             - { entity: 'User', icon: 'users'}
+            - { label: "Reinitialiser MDP", route: "reset-password"}
+
+            - label: 'Produit'
+            - { entity: 'Produits', label: "Liste Produit"}
+            - { label: "ajouter un Produit", route: "ajout-produit"}
+            - { label: "modifier un produit", route: "modif-produit"}
+
+            - label: "stock"
+            - { label: "gestion stock", route: "modif-stock-produit"}
+
 
             - label: 'Liens internes'
             - {label: 'Notre site', route: "Accueil", icon: "calendar"}
+            - {label: "info société", route: 'info-societe'}
     entities:
         User:
             class: App\Entity\User
@@ -33,3 +44,16 @@ easy_admin:
                     - {property: 'password', type: 'text'}
                     - {property: 'email', type: 'email'}
                     - { property: 'role', type: 'choice', type_options:{choices: {'Utilisateur':'ROLE_USER', 'Admin':'ROLE_ADMIN'}}}
+
+        Produits:
+            class: App\Entity\Produits
+            list:
+                title: "Liste des produits"
+                fields:
+                    - {property: 'ref'}
+                    - {property: 'nom'}
+                    - {property: 'description'}
+                    - {property: 'fabricant'}
+                    - {property: 'prix'}
+            disabled_actions: ["new", "edit"]
+

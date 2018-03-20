@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    Mes commandes
+{% endblock %}
+{% block navAcuueil %}
+{% endblock %}
+{% block navBoutique %}
+{% endblock %}
+{% block body %}
+    <div style="text-align: center; margin-bottom: 15px">
+        <div class="normal-cursor bubble-speech bubble-center div-bouton" id="salon"
+             style="color: blue; border-color: blue; margin-left: 0%; font-size: 25pt; width: 40%;">
+            <p><strong>Mes commandes</strong></p>
+        </div>
+    </div>
+    {% for commande in commandes %}
+        <div style="text-align: center; margin-bottom: 15px">
+            <div class="normal-cursor bubble-speech bubble-center div-bouton" id="salon"
+                 style="color: blue; border-color: blue; margin-left: 0%; font-size: 25pt; width: 60%">
+                <p>numéro de commande : {{ commande.idCommande }}</p>
+                <p> Prix total (TTC) : {{ commande.prixCommande }} €</p>
+                {% if commande.idStatut.idStatut == 1 %}
+                    <p>État commande : <span style="color: red">en attente de paiement</span></p>
+                {% elseif commande.idStatut.idStatut == 2 %}
+                    <p>État commande : <span style="color: green">Payée</span></p>
+                {% else %}
+                    <p>État commande : <span style="color: darkblue">Livrée</span></p>
+                {% endif %}
+                <button class="pixel link-cursor button" name="{{ commande.idCommande }}"
+                        style="background-color: green; color: white; padding-top: 0px; width: 150px"><span
+                            style="font-size: 15pt">Détail</span><i
+                            class="fa fa-info-circle fa-3x author"
+                            style="color: white; padding-top: 20px;"></i>
+                </button>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
+{% block javascripts %}
+    <script>
+        $(document).ready(function () {
+            $("button").click(function () {
+               location.href = "/Profil/Commande/"+this.name;
+            })
+        })
+    </script>
+{% endblock %}

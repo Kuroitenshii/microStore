@@ -9,11 +9,13 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use Symfony\Component\Form\Tests\Extension\Core\Type\IntegerTypeTest;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ResetType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,6 +34,9 @@ class Inscription extends AbstractController{
         $form = $this->createFormBuilder($user)
             ->add('pseudo', TextType::class, ['label' => 'Pseudo :', 'label_attr' => ['class' => 'normal-cursor'], 'attr' => ['class' => 'text-cursor', 'style' => "margin-bottom: 10%"],])
             ->add('email', EmailType::class, ['label' => 'E-mail :', 'label_attr' => ['class' => 'normal-cursor'], 'attr' => ['class' => 'text-cursor', 'style' => "margin-bottom: 10%"],])
+            ->add('adresse', TextType::class, ['label' => 'Adresse :', 'label_attr' => ['class' => 'normal-cursor'], 'attr' => ['class' => 'text-cursor', 'style' => "margin-bottom: 10%"],])
+            ->add('postal', IntegerType::class, ['label' => 'Code postal :', 'label_attr' => ['class' => 'normal-cursor'], 'attr' => ['class' => 'text-cursor', 'style' => "margin-bottom: 10%"],])
+            ->add('ville', TextType::class, ['label' => 'Ville :', 'label_attr' => ['class' => 'normal-cursor'], 'attr' => ['class' => 'text-cursor', 'style' => "margin-bottom: 10%"],])
             ->getForm();
 
         $form->handleRequest($request);
@@ -45,7 +50,7 @@ class Inscription extends AbstractController{
             return $this->redirectToRoute('inscription-succes', array('id' => $user->getUserName(), 'mdp' => $user->getPassword()));
         }
 
-        return $this->render('inscription/inscription.html.twig', array('form' => $form->createView(),));
+        return $this->render('form/formulaire_inscription.html.twig', array('form' => $form->createView(),));
 
     }
 

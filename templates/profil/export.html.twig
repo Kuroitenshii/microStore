@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="build/css/app.css" type="text/css" />
+    <style>
+        <!--
+        @import url("https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css");
+        -->
+
+        /* On commence par définir les propriétés de la page : les marges en haut
+         * et en bas permettront d'insérer un en-tête et un pied de page */
+        @page {
+            margin: 50px 0 25px 0;
+            background-color: #F6B26A;
+        }
+
+        /* La position fixed permet de placer les éléments sur toutes les pages
+         * du document pdf, le reste n'est que décoration */
+        #header, #footer {
+            position: fixed;
+            left: 0px;
+            right: 0px;
+            color: #fff;
+            background-color: #E16665;
+            text-transform: uppercase;
+            text-align: center;
+            font-weight: bold
+        }
+
+        #header {
+            top: -50px;
+            height: 50px;
+        }
+
+        #footer {
+            bottom: -25px;
+            height: 25px;
+        }
+
+        /* Pour améliorer un peu la lisibilité on ajoute une marge au corps de
+         * texte. Ca aurait pu être fait en agrandissant les marges au niveau
+         * de la page mais je trouve qu'utiliser un div dédié pour le contenu
+         * est cohérent */
+        #content {
+            margin: 25px;
+
+        }
+
+        #footer .page-number:after {
+            content: counter(page);
+            background-color: #0d6aad;
+        }
+    </style>
+</head>
+<body>
+<div class="center bottom15">
+    <div class="normal-cursor bubble-speech div-bouton bluetext noneleft text25 width40" id="salon">
+        <p><strong>Ma commande N° {{ numero }}</strong></p>
+    </div>
+</div>
+<div class="center bottom15">
+    <div class="normal-cursor bubble-speech div-bouton bluetext noneleft text25 width80" id="salon">
+        <p>Nombre d'article(s) : {{ nb }}</p>
+        <p>prix : {{ prix }} (dont TVA : {{ prix - prix / 1.2 }})</p>
+        <table class="commande" style="margin-top: 5%; margin-bottom: 5%">
+            <thead>
+            <tr>
+                <th>Référence produit</th>
+                <th>Libellé</th>
+                <th>Quantité commandé</th>
+                <th>Prix Unitaire</th>
+                <th>Prix global</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for article in commande %}
+                <tr>
+                    <td>{{ article.refProduit.ref }}</td>
+                    <td>{{ article.refProduit.nom }}</td>
+                    <td>{{ article.quantiteCommande }}</td>
+                    <td>{{ article.refProduit.prix }}</td>
+                    <td>{{ article.quantiteCommande * article.refProduit.prix }}</td>
+                </tr>
+            {% endfor %}
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><strong>Prix Total HT :</strong></td>
+                <td>{{ prix /1.2 }}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><strong>TVA 20% :</strong></td>
+                <td>{{ prix - prix /1.2 }}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><strong>Total TTC :</strong></td>
+                <td>{{ prix }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

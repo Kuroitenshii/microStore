@@ -8,7 +8,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Commande;
+use App\Entity\LignesCommande;
 use App\Entity\Produits;
+use App\Entity\StatusCommande;
 use App\Entity\Stock;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\Entity;
@@ -25,7 +28,7 @@ class Panier extends AbstractController
      * @Route("/Panier",name="Panier")
      * @return Response
      */
-    public function accueilController(SessionInterface $session, EntityManagerInterface $em)
+    public function panierController(SessionInterface $session, EntityManagerInterface $em)
     {
             if($session->has("info")){
                 $info2 = $session->get("info");
@@ -46,7 +49,7 @@ class Panier extends AbstractController
                 }
             }
             if ($change != 0) {
-                $info = $change . " élément(s) retiré (stock insuffisant)";
+                $info = $change . "élément(s) retiré (stock insuffisant)";
             }
 
 
@@ -81,6 +84,57 @@ class Panier extends AbstractController
     {
         $user = $this->getUser()->getUserName();
         $conn = $this->getDoctrine()->getConnection();
+
+        $sql = '
+        DELETE FROM panier
+        WHERE id_client =' . $user;
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+
+        $articles = $em->getRepository(\App\Entity\Panier::class)->findBy(array('idClient' => $user));
+        $nb = 0;
+        foreach ($articles as $article) {
+            $nb += $article->getQuantiteProduit();
+        }
+        $session->remove('article');
+        $session->set('article', $nb);
+
+        return new JsonResponse("");
+    }
+
+    /**
+     * @Route("/Panier/Valider", name="Panier-valider")
+     */
+    public
+    function panierValiderController(SessionInterface $session, Request $req, \Doctrine\ORM\EntityManagerInterface $em)
+    {
+        $user = $this->getUser()->getUserName();
+        $conn = $this->getDoctrine()->getConnection();
+        $prix = $req->get('prix');
+
+        $panier = $em->getRepository(\App\Entity\Panier::class)->findBy(array('idClient' => $user));
+        $statut = $em->getRepository(StatusCommande::class)->findOneBy(array('idStatut' => 1));
+        $commande = new Commande();
+        $commande->setIdClient($user);
+        $commande->setIdStatut($statut);
+        $commande->setPrixCommande($prix * 1.2);
+        $em->persist($commande);
+        $em->flush();
+        foreach ($panier as $article){
+            $ligne = new LignesCommande();
+            $produit = $em->getRepository(Produits::class)->findOneBy(array('ref' => $article->getRefProduit()));
+            $ligne->setIdCommande($commande);
+            $ligne->setRefProduit($produit);
+            $ligne->setQuantiteCommande($article->getQuantiteProduit());
+            $stock = $em->getRepository(Stock::class)->findOneBy(array("refProduit" => $article->getRefProduit()));
+            $quantiteActuel = $stock->getQuantiteStock();
+            $restant = $quantiteActuel - $article->getQuantiteProduit();
+            $stock->setQuantiteStock($restant);
+            $em->persist($ligne);
+            $em->flush();
+        }
+
+
 
         $sql = '
         DELETE FROM panier

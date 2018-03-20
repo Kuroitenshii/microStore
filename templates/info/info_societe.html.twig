@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    Info Société
+{% endblock %}
+{% block body %}
+    <div class="center bottom15">
+        <div class="center bottom15">
+            <div class="normal-cursor bubble-speech bubble-center div-bouton bluetext noneleft text25" id="salon">
+                <i class="fa fa-question-circle fa-3x author bluetext"></i>
+                <p><strong>Infos de la société</strong></p>
+            </div>
+        </div>
+        <div class="bubble-speech bubble-center">
+            <p>Nombre de client(s) : <strong>{{ nbClient }}</strong></p>
+        </div>
+        <div class="bubble-speech bubble-center">
+            <p>Nombre de produit(s) : <strong>{{ nbArticle }}</strong></p>
+        </div>
+        <div class="bubble-speech bubble-center">
+            <p>Nombre de commande(s) : <strong>{{ nbCommande }}</strong></p>
+        </div>
+        <div class="bubble-speech bubble-center">
+            <p>Chiffre d'affaire : <strong>{{ chiffreAffaire }}</strong></p>
+        </div>
+    </div>
+{% endblock %}

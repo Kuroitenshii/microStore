@@ -59,9 +59,9 @@ class LignesCommande
     }
 
     /**
-     * @param \Commande $idCommande
+     * @param Commande $idCommande
      */
-    public function setIdCommande(\Commande $idCommande)
+    public function setIdCommande(Commande $idCommande)
     {
         $this->idCommande = $idCommande;
     }
@@ -75,9 +75,9 @@ class LignesCommande
     }
 
     /**
-     * @param \Produits $refProduit
+     * @param Produits $refProduit
      */
-    public function setRefProduit(\Produits $refProduit)
+    public function setRefProduit(Produits $refProduit)
     {
         $this->refProduit = $refProduit;
     }

@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}Accueil{% endblock %}</title>
-    <link rel="stylesheet" href="{{ asset("build/css/app.css") }}" type="text/css"/>
+    <link rel="stylesheet" href="{{ asset("build/css/app.css") }}" type="text/css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" type="text/css" />
     <script src="{{ asset("build/js/app.js") }}"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.3/js/all.js"></script>
     {% block stylesheets %}{% endblock %}
@@ -43,7 +44,7 @@
                     <i class="hidden-xs fas fa-users fa-2x"></i></a>
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 <div class="dropdown-menu">
-                    <a class="dropdown-item link-cursor" href="#">Mes commandes</a>
+                    <a class="dropdown-item link-cursor" href="/Profil/Commande">Mes commandes</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item link-cursor" href="/Panier">Mon Panier</a>
                     <div class="dropdown-divider"></div>

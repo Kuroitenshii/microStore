@@ -39,6 +39,13 @@ class Commande
     private $idStatut;
 
     /**
+     * @var float
+     *
+     * @ORM\Column(name="prix_commande", type="float", nullable=false)
+     */
+    private $prixCommande;
+
+    /**
      * Commande constructor.
      */
     public function __construct()
@@ -86,12 +93,29 @@ class Commande
     }
 
     /**
-     * @param \StatusCommande $idStatut
+     * @param StatusCommande $idStatut
      */
-    public function setIdStatut(\StatusCommande $idStatut)
+    public function setIdStatut(StatusCommande $idStatut)
     {
         $this->idStatut = $idStatut;
     }
+
+    /**
+     * @return float
+     */
+    public function getPrixCommande()
+    {
+        return $this->prixCommande;
+    }
+
+    /**
+     * @param float $prixCommande
+     */
+    public function setPrixCommande(float $prixCommande)
+    {
+        $this->prixCommande = $prixCommande;
+    }
+
 
 
 }

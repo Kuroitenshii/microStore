@@ -1,4 +1,7 @@
 {% extends 'base.html.twig' %}
+{% block title %}
+    Accueil
+{% endblock %}
 {% block body %}
     <div style="text-align: center">
         <div class="link-cursor bubble-speech bubble-center rotate div-bouton" id="boutique"
@@ -64,6 +67,9 @@
             })
             $("#commande").click(function () {
                 document.location.href = "/Profil/Commande"
+            })
+            $("#panier").click(function () {
+                document.location.href = "/Panier"
             })
         })
     </script>

@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    Modifier Client
+{% endblock %}
+{% block navAcuueil %}
+{% endblock %}
+{% block navBoutique %}
+{% endblock %}
+{% block navPanier %}
+    active
+{% endblock %}
+{% block body %}
+        <div class="center bottom15">
+            <div class="center bottom15">
+                <div class="normal-cursor bubble-speech bubble-center div-bouton bluetext noneleft text25" id="salon">
+                    <i class="fa fa-users fa-3x author bluetext"></i>
+                    <p><strong>Clients</strong></p>
+                </div>
+            </div>
+            <table class="panier">
+                <thead>
+                <tr>
+                    <th>Identifiant</th>
+                    <th>Mot de passe</th>
+                    <th>Nom</th>
+                    <th>Reinitialiser MDP</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for element in client %}
+                    <tr>
+                        <td>{{ element.username }}</td>
+                        <td>{{ element.password }}</td>
+                        <td>{{ element.pseudo }}</td>
+                        <td>
+                            <button id="reset" name="{{ element.username }}" class="pixel link-cursor button whitetext width100 green ptop0"><i
+                                        class="fa fa-key fa-3x author ptop20px whitetext"></i>
+                            </button>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        $(document).ready(function () {
+            $("button").click(function () {
+                if (this.id == 'reset') {
+                    document.location.href = "/Reset/Password/"+this.name;
+                }
+            })
+        })
+    </script>
+{% endblock %}

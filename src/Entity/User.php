@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Id\AbstractIdGenerator;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Validator\Constraint as Assert;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
@@ -52,6 +52,31 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(name="mail", type="string", length=255, nullable=false)
      */
     private $email;
+
+    /**
+     * @var string
+     * @ORM\Column(name="adresse", type="string", length=255, nullable=false)
+     */
+    private $adresse;
+
+    /**
+     * @var integer
+     * @ORM\Column(name="code_postal", type="integer", length=5, nullable=false)
+     * @Assert\Type("integer")
+     * @Assert\Length(
+     *      min = 5,
+     *      max = 5,
+     *      minMessage = "le code postal doit contenir 5 chiffre",
+     *      maxMessage = "le code postal doit contenir 5 chiffre")
+     */
+    private $postal;
+
+    /**
+     * @var string
+     * @ORM\Column(name="ville", type="string", length=255, nullable=false)
+     * @Assert\Type("string")
+     */
+    private $ville;
 
     /**
      * User constructor.
@@ -169,6 +194,56 @@ class User implements UserInterface, \Serializable
             $this->password
             ) = unserialize($serialized);
     }
+
+    /**
+     * @return string
+     */
+    public function getAdresse()
+    {
+        return $this->adresse;
+    }
+
+    /**
+     * @param string $adresse
+     */
+    public function setAdresse(string $adresse)
+    {
+        $this->adresse = $adresse;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPostal()
+    {
+        return $this->postal;
+    }
+
+    /**
+     * @param int $postal
+     */
+    public function setPostal(int $postal)
+    {
+        $this->postal = $postal;
+    }
+
+    /**
+     * @return string
+     */
+    public function getVille()
+    {
+        return $this->ville;
+    }
+
+    /**
+     * @param string $ville
+     */
+    public function setVille(string $ville)
+    {
+        $this->ville = $ville;
+    }
+
+
 
 
 

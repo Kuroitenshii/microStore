@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    Modifier Stock
+{% endblock %}
+{% block navAcuueil %}
+{% endblock %}
+{% block navBoutique %}
+{% endblock %}
+{% block navPanier %}
+    active
+{% endblock %}
+{% block body %}
+        <div class="center bottom15">
+            <div class="center bottom15">
+                <div class="normal-cursor bubble-speech bubble-center div-bouton bluetext noneleft text25" id="salon">
+                    <i class="fa fa-gamepad fa-3x author bluetext"></i>
+                    <p><strong>Console de Salon</strong></p>
+                </div>
+            </div>
+            <table class="panier">
+                <thead>
+                <tr>
+                    <th>Référence</th>
+                    <th>Nom</th>
+                    <th>Stock Disponible</th>
+                    <th>Modifier Stock</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for key, element in console %}
+                    <tr>
+                        <td>{{ element.ref }}</td>
+                        <td>{{ element.nom }}</td>
+                        <td>{{ stockC[key] }}</td>
+                        <td>
+                            <button id="stock" name="{{ element.ref }}" class="pixel link-cursor button whitetext width100 green ptop0"><i
+                                        class="fa fa-cogs fa-3x author ptop20px whitetext"></i>
+                            </button>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <div class="center bottom15">
+                <div class="normal-cursor bubble-speech bubble-center div-bouton bluetext noneleft text25" id="salon">
+                    <i class="fa fa-mobile-alt fa-3x author bluetext"></i>
+                    <p><strong>Console Portable</strong></p>
+                </div>
+            </div>
+            <table class="panier">
+                <thead>
+                <tr>
+                    <th>Référence</th>
+                    <th>Nom</th>
+                    <th>Stock Disponible</th>
+                    <th>Modifier Stock</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for key, element in portable %}
+                    <tr>
+                        <td>{{ element.ref }}</td>
+                        <td>{{ element.nom }}</td>
+                        <td>{{ stockP[key]}}</td>
+                        <td>
+                            <button id="stock" name="{{ element.ref }}" class="pixel link-cursor button whitetext width100 green ptop0"><i
+                                        class="fa fa-cogs fa-3x author ptop20px whitetext"></i>
+                            </button>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        $(document).ready(function () {
+            $("button").click(function () {
+                if (this.id == 'stock') {
+                    document.location.href = "/Modif/Stock/Produit/"+this.name;
+                }
+            })
+        })
+    </script>
+{% endblock %}

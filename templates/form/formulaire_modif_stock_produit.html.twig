@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    Modifier Stock
+{% endblock %}
+{% block body %}
+    {{ form_start(form, {attr: {'enctype': 'multipart/form-data', class: 'form-style-1 bubble-speech bubble-center', style: 'text-align: center; padding:30px'} }) }}
+    {{ form_widget(form) }}
+    <div style="margin-top: 5%">
+        <input type="submit" class="link-cursor pixel" style="background-color: green" value="Confirmer"/>
+        <input type="submit" class="link-cursor pixel" style="background-color: red" value="Supprimer"/>
+    </div>
+    {{ form_end(form) }}
+{% endblock %}

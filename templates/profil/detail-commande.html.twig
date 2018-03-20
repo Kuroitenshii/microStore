@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    Mes commandes
+{% endblock %}
+{% block navAcuueil %}
+{% endblock %}
+{% block navBoutique %}
+{% endblock %}
+{% block stylesheets %}
+{% endblock %}
+{% block body %}
+    <div class="center bottom15">
+        <div class="normal-cursor bubble-speech bubble-center div-bouton bluetext noneleft text25 width40" id="salon">
+            <p><strong>Ma commande N° {{ numero }}</strong></p>
+        </div>
+    </div>
+    <div class="center bottom15">
+        <div class="normal-cursor bubble-speech bubble-center div-bouton bluetext noneleft text25 width80" id="salon" style="width: 40%">
+            <p>Nombre d'article(s) : {{ nb }}</p>
+            <p>prix : {{ prix }} (dont TVA : {{ prix - prix / 1.2 }})</p>
+            <table class="commande top5 bottom5">
+                <thead>
+                <tr>
+                    <th>Référence produit</th>
+                    <th>Libellé</th>
+                    <th>Quantité commandé</th>
+                    <th>Prix Unitaire</th>
+                    <th>Prix global</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for article in commande %}
+                    <tr>
+                        <td>{{ article.refProduit.ref }}</td>
+                        <td>{{ article.refProduit.nom }}</td>
+                        <td>{{ article.quantiteCommande }}</td>
+                        <td>{{ article.refProduit.prix }}</td>
+                        <td>{{ article.quantiteCommande * article.refProduit.prix }}</td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><strong>Prix Total HT :</strong></td>
+                    <td>{{ prix /1.2 }}</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><strong>TVA 20% :</strong></td>
+                    <td>{{ prix - prix /1.2 }}</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><strong>Total TTC :</strong></td>
+                    <td>{{ prix }}</td>
+                </tr>
+                </tbody>
+                </tr>
+            </table>
+            {% if etat.idStatut == 1 %}
+                <button class="pixel link-cursor button red whitetext ptop0 width40" id="annuler" name="{{ numero }}"><span
+                            class="text15">Annuler la Commander</span><i
+                            class="fa fa-info-circle fa-3x author whitetext ptop20px"></i>
+                </button>
+                <button class="pixel link-cursor button green whitetext ptop0 width40 left5" id="payer" name="{{ numero }}"><span
+                            class="text15">Payer la commande</span><i
+                            class="fa fa-info-circle fa-3x author whitetext ptop20px"></i>
+                </button>
+            {% elseif etat.idStatut == 2 %}
+                <button class="pixel link-cursor button blue whitetext ptop0 width40" id="exporter" name="{{ numero }}"><span
+                            class="text15">Télécharger le PDF</span><i
+                            class="fa fa-info-circle fa-3x author whitetext ptop20px"></i>
+                </button>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        $(document).ready(function () {
+            $("button").click(function () {
+                if (this.id == "annuler") {
+                    document.location.href = "/Profil/Commande/annuler/" + this.name;
+                } else if (this.id == "payer") {
+                    document.location.href = "/Profil/Commande/valider/" + this.name;
+                } else if (this.id == "exporter"){
+                    document.location.href = "/Profil/Commande/exporter/" + this.name;
+                }
+            })
+        })
+    </script>
+{% endblock %}

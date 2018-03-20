@@ -66,7 +66,7 @@
                     <td></td>
                     <td></td>
                     <td><strong>prix total (HT)</strong></td>
-                    <td>{{ tot }} €</td>
+                    <td><strong id="prix">{{ tot }}</strong> €</td>
                     <td>
                         <button id="valider" class="pixel link-cursor button"
                                 style="background-color: green; color: white; padding-top: 0px; width: 150px"><span
@@ -116,6 +116,15 @@
                         method: "post",
                         success: function () {
                             location.reload(true);
+                        }
+                    })
+                } else if (this.id == "valider") {
+                    $.ajax({
+                        url: '/Panier/Valider',
+                        method: "post",
+                        data: "prix="+document.getElementById("prix").innerText,
+                        success: function () {
+                            location.href = "/Profil/Commande";
                         }
                     })
                 }

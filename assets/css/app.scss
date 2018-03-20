@@ -1,4 +1,145 @@
-@import '~bootstrap/scss/bootstrap';
+//@import '~bootstrap/scss/bootstrap';
+
+
+.center{
+  text-align: center;
+}
+
+//couleur de fond ou de texte
+.blue{
+  background-color: blue;
+}
+
+.red{
+  background-color: red;
+}
+
+.green{
+  background-color: green;
+}
+
+.grey{
+  background-color: grey;
+}
+
+.bluetext{
+  color: blue ;
+}
+
+.whitetext{
+  color: white ;
+}
+
+.redtext{
+  color: red;
+}
+
+// padding
+.ptop0{
+  padding-top: 0% !important;
+}
+
+.ptop20px{
+  padding-top: 20px !important;
+}
+
+
+//taille de texte
+.text15{
+  font-size: 15pt ;
+}
+
+.text25{
+  font-size: 25pt ;
+}
+
+//margin left
+.noneleft{
+  margin-left: 0% !important;
+}
+
+.left5{
+  margin-left: 5% !important;
+}
+
+.left10p{
+  margin-left: 10px !important;
+}
+
+.left40p{
+  margin-left: 40px;
+}
+
+//margin top
+.top5{
+  margin-top: 5% !important;
+}
+
+.top10p{
+  margin-top: 10px !important;
+}
+
+//margin right
+.right-15p{
+  margin-right: -15px !important;
+}
+
+//margi bottom
+.bottom10p{
+  margin-bottom: 10px !important;
+}
+
+.bottom15{
+  margin-bottom: 15px !important;
+}
+
+.bottom5{
+  margin-bottom: 5% !important;
+}
+
+//width & max-width
+.width40{
+  width: 40% !important;
+}
+
+.width60{
+  width: 60% !important;
+}
+
+.width80{
+  width: 80% !important;
+}
+
+.width100{
+  width: 100% !important;
+}
+
+.width150px{
+  width: 150px !important;
+}
+
+.maxw100p{
+  max-width: 100px !important;
+}
+
+.maxw270p{
+  max-width: 270px !important;
+}
+
+//height & max-height
+.height30px{
+  height: 30px !important;
+}
+
+.height570px{
+  height: 570px !important;
+}
+
+.maxh270p{
+  max-height: 270px !important;
+}
+
+//cursor
 
 .link-cursor {
   cursor: url("/cursor/You Got the Thing.cur"), pointer
@@ -12,6 +153,7 @@
   cursor: url("/cursor/Link - Normal Select.cur"), text;
 }
 
+//element div
 .bubble-speech {
   text-align: center;
   position: relative;
@@ -296,5 +438,33 @@ table.panier thead th {
   text-align: center;
 }
 table.panier tfoot td {
+  font-size: 16px;
+}
+
+table.commande {
+  font-family: "Lucida Console", Monaco, monospace;
+  border: 1px solid #000000;
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+}
+table.commande td, table.commande th {
+  border: 1px solid #000000;
+  padding: 5px 4px;
+}
+table.commande tbody td {
+  font-size: 18pt;
+}
+table.commande thead {
+  background: #B01919;
+  border-bottom: 3px solid #000000;
+}
+table.commande thead th {
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  text-align: left;
+}
+table.commande tfoot td {
   font-size: 16px;
 }

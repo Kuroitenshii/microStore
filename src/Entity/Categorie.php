@@ -3,14 +3,16 @@ namespace App\Entity;
 
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Categorie
  *
  * @ORM\Table(name="categorie")
  * @ORM\Entity
+ * @Serializer\ExclusionPolicy("all")
  */
-class Categorie
+class Categorie implements \Serializable
 {
     /**
      * @var int
@@ -18,6 +20,7 @@ class Categorie
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Serializer\Expose()
      */
     private $id;
 
@@ -65,6 +68,21 @@ class Categorie
     public function setNomCategorie(string $nomCategorie)
     {
         $this->nomCategorie = $nomCategorie;
+    }
+
+    public function serialize(){
+        return serialize(array(
+            $this->id,
+            $this->nomCategorie
+        ));
+    }
+
+    public function unserialize($serialized){
+        list(
+
+            $this->id,
+            $this->nomCategorie
+            ) = unserialize($serialized);
     }
 
 

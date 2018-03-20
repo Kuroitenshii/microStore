@@ -3,6 +3,10 @@ namespace App\Entity;
 
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
 /**
  * Produits
@@ -10,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="produits", indexes={@ORM\Index(name="id_categorie", columns={"id_categorie"})})
  * @ORM\Entity
  */
-class Produits
+class Produits implements \Serializable
 {
     /**
      * @var int
@@ -229,6 +233,34 @@ class Produits
     public function setImageFabricant(string $imageFabricant)
     {
         $this->imageFabricant = $imageFabricant;
+    }
+
+    public function serialize(){
+        $encoders = array(new XmlEncoder(), new JsonEncoder());
+        $normalizers = array(new ObjectNormalizer());
+
+        $serializer = new Serializer($normalizers, $encoders);
+        return $serializer->serialize(array(
+            'Référence' => $this->ref,
+            'Catégorie' => $this->idCategorie->getNomCategorie(),
+            'Nom' => $this->nom,
+            'Description' => $this->description,
+            'Année' => $this->annee,
+            'Nom_fabricant' => $this->fabricant,
+            'Prix' => $this->prix
+        ), 'json');
+    }
+
+    public function unserialize($serialized){
+        list(
+
+            $this->ref,
+            $this->description,
+            $this->annee,
+            $this->fabricant,
+            $this->nom,
+            $this->prix,
+            ) = unserialize($serialized);
     }
 
 
