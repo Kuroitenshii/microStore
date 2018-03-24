@@ -1,142 +1,184 @@
 //@import '~bootstrap/scss/bootstrap';
 
-
-.center{
+.center {
   text-align: center;
 }
 
 //couleur de fond ou de texte
-.blue{
+.blue {
   background-color: blue;
 }
 
-.red{
+.red {
   background-color: red;
 }
 
-.green{
+.green {
   background-color: green;
 }
 
-.grey{
+.grey {
   background-color: grey;
 }
 
-.bluetext{
-  color: blue ;
+.darkblue {
+  background-color: darkblue;
 }
 
-.whitetext{
-  color: white ;
+.bluetext {
+  color: blue;
 }
 
-.redtext{
+.whitetext {
+  color: white;
+}
+
+.redtext {
   color: red;
 }
 
+.orangeredtext{
+  color: orangered;
+}
+
+.mediumorchidtext{
+  color: mediumorchid;
+}
+
+.greentext{
+  color: green;
+}
+
+.darkbluetext{
+  color: darkblue;
+}
+
 // padding
-.ptop0{
+.ptop0 {
   padding-top: 0% !important;
 }
 
-.ptop20px{
+.ptop20px {
   padding-top: 20px !important;
 }
 
-
 //taille de texte
-.text15{
-  font-size: 15pt ;
+.text15 {
+  font-size: 15pt;
 }
 
-.text25{
-  font-size: 25pt ;
+.text18{
+  font-size: 18pt;
+}
+
+.text20{
+  font-size: 20pt;
+}
+
+.text25 {
+  font-size: 25pt;
 }
 
 //margin left
-.noneleft{
+.noneleft {
   margin-left: 0% !important;
 }
 
-.left5{
+.left5 {
   margin-left: 5% !important;
 }
 
-.left10p{
+.left10p {
   margin-left: 10px !important;
 }
 
-.left40p{
+.left40p {
   margin-left: 40px;
 }
 
 //margin top
-.top5{
+.top5 {
   margin-top: 5% !important;
 }
 
-.top10p{
+.top10p {
   margin-top: 10px !important;
 }
 
 //margin right
-.right-15p{
+.right-15p {
   margin-right: -15px !important;
 }
 
 //margi bottom
-.bottom10p{
+.bottom10p {
   margin-bottom: 10px !important;
 }
 
-.bottom15{
+.bottom15p {
   margin-bottom: 15px !important;
 }
 
-.bottom5{
+.bottom5 {
   margin-bottom: 5% !important;
 }
 
 //width & max-width
-.width40{
+.width40 {
   width: 40% !important;
 }
 
-.width60{
+.width50 {
+  width: 50% !important;
+}
+
+.width60 {
   width: 60% !important;
 }
 
-.width80{
+.width80 {
   width: 80% !important;
 }
 
-.width100{
+.width100 {
   width: 100% !important;
 }
 
-.width150px{
+.width100px{
+  width: 100px !important;
+}
+
+.width150px {
   width: 150px !important;
 }
 
-.maxw100p{
+.maxw100p {
   max-width: 100px !important;
 }
 
-.maxw270p{
+.maxw270p {
   max-width: 270px !important;
 }
 
-//height & max-height
-.height30px{
+//height & max-height & lineheight
+.height30px {
   height: 30px !important;
 }
 
-.height570px{
+.height270px{
+  height: 270px;
+}
+
+.height570px {
   height: 570px !important;
 }
 
-.maxh270p{
+.maxh270p {
   max-height: 270px !important;
+}
+
+.lheight30p{
+  line-height: 30px !important;
 }
 
 //cursor
@@ -153,6 +195,10 @@
   cursor: url("/cursor/Link - Normal Select.cur"), text;
 }
 
+.btn btn-succees btn-danger {
+  cursor: url("/cursor/You Got the Thing.cur"), move
+}
+
 //element div
 .bubble-speech {
   text-align: center;
@@ -164,16 +210,6 @@
   width: 300px;
   background-color: darkgray;
   padding: 16px;
-  transition: 1s ease;
-}
-
-.div-bouton {
-  margin-top: 50px;
-  margin-left: 100px;
-  display: inline-block;
-}
-
-.rotate {
   transition: 1s ease;
 }
 
@@ -203,10 +239,6 @@
   padding: 0 12px 2px 0;
 }
 
-.btn btn-succees btn-danger {
-  cursor: url("/cursor/You Got the Thing.cur"), move
-}
-
 .bubble-speech.bubble-center:after {
   z-index: 9002;
   display: block;
@@ -232,6 +264,13 @@
   border-right: 20px darkgray solid;
 }
 
+//effet rotation
+
+.rotate {
+  transition: 1s ease;
+}
+
+//ecran mot de passe pour la connexion
 .sgen {
   background: url(/images/plaque.png);
   height: 100px;
@@ -294,29 +333,7 @@
   margin: 10px auto;
 }
 
-.pixel {
-  width: 200px;
-  color: white;
-  font-family: Helvetica, Arial, Sans-Serif;
-  font-size: 14px;
-  text-decoration: none;
-  text-shadow: -1px -1px 1px #616161;
-  position: relative;
-  padding: 15px;
-  -webkit-box-shadow: 5px 5px 0 #666;
-  -moz-box-shadow: 5px 5px 0 #666;
-  -webkit-transition: all 0.3s ease;
-  -moz-transition: all 0.3s ease;
-  margin: 0 10px 0 0;
-}
-
-.pixel:hover {
-  -webkit-box-shadow: 0px 0px 0 #666;
-  -moz-box-shadow: 0px 0px 0 #666;
-  top: 5px;
-  left: 5px;
-}
-
+//formulaire
 .form-style-1 {
   margin: 10px auto;
   max-width: 400px;
@@ -385,6 +402,30 @@ select {
   width: 100%;
 }
 
+//design des boutton
+.pixel {
+  width: 200px;
+  color: white;
+  font-family: Helvetica, Arial, Sans-Serif;
+  font-size: 14px;
+  text-decoration: none;
+  text-shadow: -1px -1px 1px #616161;
+  position: relative;
+  padding: 15px;
+  -webkit-box-shadow: 5px 5px 0 #666;
+  -moz-box-shadow: 5px 5px 0 #666;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  margin: 0 10px 0 0;
+}
+
+.pixel:hover {
+  -webkit-box-shadow: 0px 0px 0 #666;
+  -moz-box-shadow: 0px 0px 0 #666;
+  top: 5px;
+  left: 5px;
+}
+
 .button {
   border: none;
   text-align: center;
@@ -413,34 +454,47 @@ select {
   transition: 0s
 }
 
+.div-bouton {
+  margin-top: 50px;
+  margin-left: 100px;
+  display: inline-block;
+}
+
+//tableau du panier
 table.panier {
   font-family: "Lucida Console", Monaco, monospace;
   width: 80%;
   text-align: center;
   margin: auto;
 }
+
 table.panier td, table.panier th {
   border: 1px solid #000000;
   padding: 10px 10px;
 }
+
 table.panier tbody td {
   font-size: 16px;
   font-weight: bold;
   color: #000000;
 }
+
 table.panier thead {
   background: #B01919;
 }
+
 table.panier thead th {
   font-size: 17px;
   font-weight: bold;
   color: #F0F0F0;
   text-align: center;
 }
+
 table.panier tfoot td {
   font-size: 16px;
 }
 
+//tableau recapitulatif de commande
 table.commande {
   font-family: "Lucida Console", Monaco, monospace;
   border: 1px solid #000000;
@@ -448,23 +502,40 @@ table.commande {
   text-align: center;
   border-collapse: collapse;
 }
+
 table.commande td, table.commande th {
   border: 1px solid #000000;
   padding: 5px 4px;
 }
+
 table.commande tbody td {
   font-size: 18pt;
 }
+
 table.commande thead {
   background: #B01919;
   border-bottom: 3px solid #000000;
 }
+
 table.commande thead th {
   font-size: 20px;
   font-weight: bold;
   color: white;
   text-align: left;
 }
+
 table.commande tfoot td {
   font-size: 16px;
+}
+
+//logo
+.logo-perso {
+  width: 950px;
+  height: 350px
+}
+
+//display
+
+.inlineblock{
+  display: inline-block;
 }

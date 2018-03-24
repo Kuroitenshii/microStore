@@ -54,9 +54,9 @@
 {% block body %}
     <body onload="securi()">
     {% if error %}
-        <div style="text-align: center; color: red"><p>identifiant ou mot de passe invalide</p></div>
+        <div class="center redtext"><p>identifiant ou mot de passe invalide</p></div>
     {% endif %}
-    <form action="{{ path('Connexion') }}" method="post" class="bubble-speech bubble-center" style="text-align: center">
+    <form action="{{ path('Connexion') }}" method="post" class="bubble-speech bubble-center center">
         <label for="username" class="normal-cursor">Inserer votre numéro de client :</label></br>
         <input class="text-cursor" type="text" id="username" name="_username" value="{{ last_username }}"/></br></br>
 
@@ -81,7 +81,7 @@
             </table>
             </div></br></br>
 
-        <button type="submit" class="link-cursor pixel" style="background-color: green">Connexion</button>
-        <button type="reset" class="link-cursor pixel" style="background-color: red">Supprimer</button>
+        <button type="submit" class="link-cursor pixel green">Connexion</button>
+        <button type="reset" class="link-cursor pixel red">Supprimer</button>
     </form>
 {% endblock body %}

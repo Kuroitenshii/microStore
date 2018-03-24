@@ -16,10 +16,10 @@
             </div>
         </div>
     {% for key, uneConsole in console %}
-        <div class="normal-cursor bubble-speech bubble-center div-bouton bluetext height570px" id="boutique">
+        <div class="normal-cursor bubble-speech bubble-center div-bouton bluetext height570px" id="Boutique-{{ uneConsole.ref }}">
             <p><img src="data:image/png;base64,{{ imageF[key] }}" class="height30px maxw100p"/><strong class="left40p">{{ uneConsole.nom }}</strong>
             </p>
-            <img src="data:image/png;base64,{{ imageC[key] }}" class="maxh270p maxw270p bottom10p"/>
+            <img src="data:image/png;base64,{{ imageC[key] }}" class="height270px maxw270p bottom10p"/>
             {% if etat[key] == "Rupture de stock" %}
                 <p class="redtext"><strong><h4>{{ etat[key] }}</h4></strong></p>
                 <a href="/Boutique/Detail/{{ uneConsole.ref }}" class="pixel link-cursor blue">Détail<i
@@ -38,8 +38,8 @@
                     <a href="/Connexion" class="pixel hvr-float green">Ajouter au panier<i
                                 class="fa fa-plus-circle fa-3x author whitetext left10p ptop20px right-15p"></i></a>
                 {% endif %}
-                <strong><p id="fin-ajout" class="top10p bottom10p text15 whitetext"></p></strong>
             {% endif %}
+            <strong><p id="{{ uneConsole.ref }}" class="top10p bottom10p text15 whitetext" style="line-height: 22px; position: absolute"></p></strong>
         </div>
     {% endfor %}
 {% endblock %}
@@ -52,7 +52,8 @@
                     method: "post",
                     data: "ref="+this.name,
                     success: function(data){
-                        document.getElementById('fin-ajout').innerHTML = data;
+                        console.log(data);
+                        $("#"+data.ref).html(data.res);
                     }
                 })
             })

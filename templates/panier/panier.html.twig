@@ -11,22 +11,19 @@
 {% endblock %}
 {% block body %}
     {% if (app.session.get('article') == 0) %}
-        <div style="text-align: center; margin-bottom: 15px">
-            <div class="normal-cursor bubble-speech bubble-center div-bouton" id="salon"
-                 style="color: blue; border-color: blue; margin-left: 0%; font-size: 25pt">
+        <div class="center bottom15p">
+            <div class="normal-cursor bubble-speech bubble-center div-bouton bluetext noneleft text25" id="salon">
                 <p><strong>Panier Vide</strong></p>
             </div>
         </div>
     {% else %}
-        <div style="text-align: center; margin-bottom: 15px">
-            <div class="normal-cursor bubble-speech bubble-center div-bouton" id="salon"
-                 style="color: blue; border-color: blue; margin-left: 0%; font-size: 25pt">
-                <strong><p style="margin-top: 10px; margin-bottom: 10px; font-size: 15pt; color: red">{{ info }}</p>
+        <div class="center bottom15p">
+            <div class="normal-cursor bubble-speech bubble-center div-bouton bluetext noneleft text25" id="salon">
+                <strong><p class="top10p bottom10p text15 redtext">{{ info }}</p>
                 </strong>
-                <i class="fa fa-shopping-basket fa-2x author" style="color: blue;"></i>
+                <i class="fa fa-shopping-basket fa-2x author bluetext"></i>
                 <p><strong>Panier</strong></p>
-                <strong><p id="erreur"
-                           style="margin-top: 10px; margin-bottom: 10px; font-size: 15pt; color: white">{{ info2 }}</p></strong>
+                <strong><p id="erreur" class="top10p bottom10p text15 whitetext">{{ info2 }}</p></strong>
             </div>
             <table class="panier">
                 <thead>
@@ -48,15 +45,11 @@
                         <td>{{ element.quantite }}</td>
                         <td>{{ element.total }}</td>
                         <td>
-                            <button id="ajout" name="{{ element.ref }}" class="pixel link-cursor button"
-                                    style="background-color: green; color: white; padding-top: 0px; width: 100px"><i
-                                        class="fa fa-plus-circle fa-3x author"
-                                        style="color: white;padding-top: 20px"></i>
+                            <button id="ajout" name="{{ element.ref }}" class="pixel link-cursor button green whitetext ptop0 width100px"><i
+                                        class="fa fa-plus-circle fa-3x author whitetext ptop20px"></i>
                             </button>
-                            <button id="retrait" name="{{ element.ref }}" class="pixel link-cursor button"
-                                    style="background-color: red; color: white; padding-top: 0px; width: 100px"><i
-                                        class="fa fa-times-circle fa-3x author"
-                                        style="color: white; padding-top: 20px;"></i>
+                            <button id="retrait" name="{{ element.ref }}" class="pixel link-cursor button red whitetext ptop0 width100px"><i
+                                        class="fa fa-times-circle fa-3x author whitetext ptop20px"></i>
                             </button>
                         </td>
                     </tr>
@@ -68,17 +61,11 @@
                     <td><strong>prix total (HT)</strong></td>
                     <td><strong id="prix">{{ tot }}</strong> €</td>
                     <td>
-                        <button id="valider" class="pixel link-cursor button"
-                                style="background-color: green; color: white; padding-top: 0px; width: 150px"><span
-                                    style="font-size: 15pt">Valider</span><i
-                                    class="fa fa-check fa-3x author"
-                                    style="color: white; padding-top: 20px;"></i>
+                        <button id="valider" class="pixel link-cursor button green whitetext ptop0 width150px"><span class="text15">Valider</span><i
+                                    class="fa fa-check fa-3x author whitetext ptop20px"></i>
                         </button>
-                        <button id="vider" class="pixel link-cursor button"
-                                style="background-color: red; color: white; padding-top: 0px; width: 150px"><span
-                                    style="font-size: 15pt">Vider</span><i
-                                    class="fa fa-times fa-3x author"
-                                    style="color: white; padding-top: 20px;"></i>
+                        <button id="vider" class="pixel link-cursor button red whitet ptop0 width150px"><span class="text15">Vider</span><i
+                                    class="fa fa-times fa-3x author whitetext ptop20px"></i>
                         </button>
                     </td>
                 </tr>

@@ -10,7 +10,7 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.3/js/all.js"></script>
     {% block stylesheets %}{% endblock %}
 </head>
-<nav class="navbar navbar-expand-sm navbar-dark" style="background-color: darkblue">
+<nav class="navbar navbar-expand-sm navbar-dark darkblue">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
             aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -29,11 +29,11 @@
             </li>
         </ul>
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item" style="color: white">
+            <li class="nav-item whitetext">
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                    <span class="nav-link" style="color: white;"">Connecté en tant que : {{ app.user.pseudo }}</span>
+                    <span class="nav-link whitetext">Connecté en tant que : {{ app.user.pseudo }}</span>
                 {% else %}
-                    <span class="nav-link" style="color: white;">Non connecter</span>
+                    <span class="nav-link whitetext" >Non connecter</span>
                 {% endif %}
             </li>
         </ul>
@@ -65,9 +65,9 @@
         </div>
     </div>
 </nav>
-<div id="egg" style="text-align: center"></div>
-<div style="text-align: center; margin-top: 20px" id="image">
-    <img src="{{ asset("images/retrogaming-logo.jpg") }}" style="width: 950px; height: 350px"/>
+<div id="egg" class="center"></div>
+<div class="center ptop20px" id="image">
+    <img src="{{ asset("images/retrogaming-logo.jpg") }}" class="logo-perso"/>
 </div>
 {% block body %}
 {% endblock %}

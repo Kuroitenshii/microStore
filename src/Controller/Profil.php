@@ -28,9 +28,11 @@ class Profil extends AbstractController
     /**
      * @Route("/Profil/Commande",name="commande-liste")
      * @return Response
+     * affichage de la liste des commande d'un client
      */
     public function commandeController(SessionInterface $session, EntityManagerInterface $em)
     {
+        ///récupération de la liste des commande
         $commande = $em->getRepository(Commande::class)->findBy(array('idClient' => $this->getUser()->getUserName()));
         return $this->render('profil/commande.html.twig', array('commandes' => $commande));
     }
@@ -38,25 +40,35 @@ class Profil extends AbstractController
     /**
      * @Route("/Profil/Commande/{id}",name="commande-liste-{id}")
      * @return Response
+     * affichage des detial d'un commande selectionné
      */
     public function detailCommandeController(SessionInterface $session, EntityManagerInterface $em, $id)
     {
+        //récupération de la commande et de ses lignes ainsi que du pseudo de l'utilisateur
         $commande = $em->getRepository(Commande::class)->findOneBy(array("idCommande" => $id));
         $lignes = $em->getRepository(LignesCommande::class)->findBy(array("idCommande" => $id));
         $user = $this->getUser()->getUserName();
+
+        //on récupére le nombre total d'article de la commande
         $nb = 0;
         foreach ($lignes as $article) {
             $nb += $article->getQuantiteCommande();
         }
+
+        //on affiche la vue twig
         return $this->render('profil/detail-commande.html.twig', array('commande' => $lignes, "prix" => $commande->getPrixCommande(), 'numero' => $commande->getIdCommande(), 'nb' => $nb, 'etat' => $commande->getIdStatut()));
     }
 
     /**
      * @Route("/Profil/Commande/annuler/{id}",name="commande-liste-annuler-{id}")
+     * annulation d'une commande
      */
     public function annulerCommandeController(SessionInterface $session, EntityManagerInterface $em, $id)
     {
+        //on récupére les ligen de la commande
         $commande = $em->getRepository(LignesCommande::class)->findBy(array("idCommande" => $id));
+
+        //pour chaque article on remet le stock dans la base de données
         foreach ($commande as $ligne){
             $stock = $em->getRepository(Stock::class)->findOneBy(array("refProduit" => $ligne->getRefProduit()));
             $stockactuel = $stock->getQuantiteStock();
@@ -64,6 +76,7 @@ class Profil extends AbstractController
             $em->flush();
         }
 
+        //on supprime la commande de la base
         $conn = $this->getDoctrine()->getConnection();
         $sql = '
         DELETE FROM commande
@@ -71,32 +84,41 @@ class Profil extends AbstractController
         $stmt = $conn->prepare($sql);
         $stmt->execute();
 
+        //on affiche le résultat positif de la suppréssion
         return $this->render('message/annulation_reussi.html.twig', array('id' => $id));
     }
 
     /**
      * @Route("/Profil/Commande/valider/{id}",name="commande-liste-valider-{id}")
+     * validation d'une commande
      */
     public function validerCommandeController(SessionInterface $session, EntityManagerInterface $em, $id)
     {
+        //récupération de la commande et du nouveau statut
         $commande = $em->getRepository(Commande::class)->findOneBy(array("idCommande" => $id));
         $statut = $em->getRepository(StatusCommande::class)->findOneBy(array("idStatut" => 2));
+
+        //changement du statut et enregistrement
         $commande->setIdStatut($statut);
         $em->flush();
 
-
+        //affichage du message de succès
         return $this->render('message/paiement_reussi.html.twig', array('id' => $id));
     }
 
     /**
      * @Route("/Profil/Commande/exporter/{id}",name="commande-liste-exporter/{id}")
      * @return Response
+     * exportation d'un commande sous format pdf
      */
     public function exporterCommandeController(SessionInterface $session, EntityManagerInterface $em, $id)
     {
+        //on récupére la commande et le sligne qu'elle contient, ainsi que le pseudo du l'utilisateur
         $commande = $em->getRepository(Commande::class)->findOneBy(array("idCommande" => $id));
         $lignes = $em->getRepository(LignesCommande::class)->findBy(array("idCommande" => $id));
         $user = $this->getUser()->getUserName();
+
+        //on récupére le nombre d'article de la commande
         $nb = 0;
         foreach ($lignes as $article) {
             $nb += $article->getQuantiteCommande();

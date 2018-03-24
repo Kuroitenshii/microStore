@@ -19,9 +19,11 @@ class Accueil extends AbstractController
     /**
      * @Route("/Accueil",name="Accueil")
      * @return Response
+     * controller de la page d'accueil du site
      */
     public function accueilController(\Doctrine\ORM\EntityManagerInterface $em, SessionInterface $session){
         if($this->getUser()){
+            // recupération et changement du nombre de produit dans le stock
             $user = $this->getUser()->getUserName();
             $articles = $em->getRepository(\App\Entity\Panier::class)->findBy(array('idClient' => $user));
             $nb = 0;

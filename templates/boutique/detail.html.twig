@@ -7,15 +7,13 @@
 {% block navBoutique %}
 {% endblock %}
 {% block body %}
-    <div style="text-align: center; margin-bottom: 15px">
-        <div class="normal-cursor bubble-speech bubble-center div-bouton" id="salon"
-             style="color: blue; border-color: blue; margin-left: 0%; font-size: 25pt; width: 40%;">
+    <div class="center bottom15p">
+        <div class="normal-cursor bubble-speech bubble-center div-bouton bluetext noneleft text25 width40" id="salon">
             <p><strong>Détail - {{ detail.nom }}</strong></p>
         </div>
     </div>
-    <div style="text-align: center; margin-bottom: 15px">
-        <div class="normal-cursor bubble-speech bubble-center div-bouton" id="salon"
-             style="color: blue; border-color: blue; margin-left: 0%; font-size: 25pt; width: 50%">
+    <div class="center bottom15p">
+        <div class="normal-cursor bubble-speech bubble-center div-bouton bluetext noneleft text25 width50" id="salon">
             <p><strong>Nom : </strong>
             <p>{{ detail.nom }}</p></p></br><img src="data:image/png;base64,{{ imageC }}"/></br></br>
             {% if etat == "Rupture de stock" %}
@@ -28,27 +26,22 @@
             <p><strong>Année de sortie : </strong>
             <p>{{ detail.annee }}</p></p></br>
             <p><strong>Description : </strong>
-            <p style="line-height: 30px">{{ detail.description }}</p></p></br>
+            <p class="lheight30p">{{ detail.description }}</p></p></br>
             {% if etat == "Rupture de stock" %}
-                <span class="pixel hvr-float" style="background-color: grey; width: 50%; font-size: 18pt">Ajouter au panier<i
-                            class="fa fa-plus-circle fa-2x author"
-                            style="color: white; margin-left: 10px; padding-top: 20px; margin-right: -15px"></i></span>
+                <span class="pixel hvr-float grey width50 text18">Ajouter au panier<i
+                            class="fa fa-plus-circle fa-2x author whitetext ptop20px right-15p left10p"></i></span>
             {% else %}
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                    <button id="ajout" name="{{ detail.ref }}" class="pixel link-cursor button"
-                            style="background-color: green; color: white; padding-top: 0px; width: 50%; font-size: 18pt">
+                    <button id="ajout" name="{{ detail.ref }}" class="pixel link-cursor button green whitetext ptop0 width50 text18">
                         Ajouter au panier<i
-                                class="fa fa-plus-circle fa-2x author"
-                                style="color: white; margin-left: 10px; padding-top: 20px; margin-right: -15px"></i>
+                                class="fa fa-plus-circle fa-2x author whitetext left10p ptop20px right-15p"></i>
                     </button>
                 {% else %}
-                    <a href="/Connexion" class="pixel hvr-float"
-                       style="background-color: green; width: 50%; font-size: 18pt">Ajouter au panier<i
-                                class="fa fa-plus-circle fa-2x author"
-                                style="color: white; margin-left: 10px; padding-top: 20px; margin-right: -15px"></i></a>
+                    <a href="/Connexion" class="pixel hvr-float green width50 text18">Ajouter au panier<i
+                                class="fa fa-plus-circle fa-2x author whitetext left10p ptop20px right-15p"></i></a>
                 {% endif %}
             {% endif %}
-            <strong><p id="fin-ajout" style="margin-top: 10px; margin-bottom: 10px; font-size: 18pt; color: white"></p>
+            <strong><p id="fin-ajout" class="top10p bottom10p text18 whitetext"></p>
             </strong>
         </div>
     </div>

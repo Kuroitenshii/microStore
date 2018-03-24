@@ -25,12 +25,17 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 class Inscription extends AbstractController{
     /**
      * @Route("/Inscription",name="inscription")
+     * affichage du formualire d'inscription
      */
     public function inscription(Request $request){
+        //creation d'un nouvel utilisateurs
         $user = new User();
+
+        //paramettrage du role et du mot de passe aléatoire
         $user->setRole("ROLE_USER");
         $user->setPassword($user->generate());
 
+        //création du formulaire
         $form = $this->createFormBuilder($user)
             ->add('pseudo', TextType::class, ['label' => 'Pseudo :', 'label_attr' => ['class' => 'normal-cursor'], 'attr' => ['class' => 'text-cursor', 'style' => "margin-bottom: 10%"],])
             ->add('email', EmailType::class, ['label' => 'E-mail :', 'label_attr' => ['class' => 'normal-cursor'], 'attr' => ['class' => 'text-cursor', 'style' => "margin-bottom: 10%"],])
@@ -41,21 +46,26 @@ class Inscription extends AbstractController{
 
         $form->handleRequest($request);
 
+        //uen fois le formulaire soumis et valide
         if ($form->isSubmitted() && $form->isValid()){
+            //récupération des info du formulaire, création et enregistrement de l'utilisateur dans la base
             $user = $form->getData();
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
 
+            //redirection vers la page de succès
             return $this->redirectToRoute('inscription-succes', array('id' => $user->getUserName(), 'mdp' => $user->getPassword()));
         }
 
+        //affichage du formulaire
         return $this->render('form/formulaire_inscription.html.twig', array('form' => $form->createView(),));
 
     }
 
     /**
      * @Route("/Inscription-Succes",name="inscription-succes")
+     * affichage de la page indiquant l'identifiant et le mot de passe du nouvel utilisateur
      */
     public function inscriptionSucces(Request $request){
         $id = $request->get('id');
