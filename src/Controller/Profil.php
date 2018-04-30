@@ -113,7 +113,7 @@ class Profil extends AbstractController
      */
     public function exporterCommandeController(SessionInterface $session, EntityManagerInterface $em, $id)
     {
-        //on récupére la commande et le sligne qu'elle contient, ainsi que le pseudo du l'utilisateur
+        //on récupére la commande et les ligne qu'elle contient, ainsi que le pseudo du l'utilisateur
         $commande = $em->getRepository(Commande::class)->findOneBy(array("idCommande" => $id));
         $lignes = $em->getRepository(LignesCommande::class)->findBy(array("idCommande" => $id));
         $user = $this->getUser()->getUserName();

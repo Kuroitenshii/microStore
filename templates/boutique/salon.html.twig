@@ -22,14 +22,14 @@
             <img src="data:image/png;base64,{{ imageC[key] }}" class="height270px maxw270p bottom10p"/>
             {% if etat[key] == "Rupture de stock" %}
                 <p class="redtext"><strong><h4>{{ etat[key] }}</h4></strong></p>
-                <a href="/Boutique/Detail/{{ uneConsole.ref }}" class="pixel link-cursor bluetext">Détail<i
+                <a href="/Boutique/Detail/{{ uneConsole.ref }}" class="pixel link-cursor blue">Détail<i
                             class="fa fa-info-circle fa-3x author whitetext left10p ptop20px right-15p"></i></a></br></br>
 
                 <span class="pixel grey">Ajouter au panier<i
                             class="fa fa-plus-circle fa-3x author whitetext left10p ptop20px right-15p"></i></span>
             {% else %}
                 <p class="redtext"><strong><h4>{{ etat[key] }} €</h4></strong></p>
-                <a href="/Boutique/Detail/{{ uneConsole.ref }}" class="pixel link-cursor bluetext">Détail<i
+                <a href="/Boutique/Detail/{{ uneConsole.ref }}" class="pixel link-cursor blue">Détail<i
                             class="fa fa-info-circle fa-3x author whitetext left10p ptop20px right-15p"></i></a></br></br>
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                     <button id="ajout" name="{{ uneConsole.ref }}" class="pixel link-cursor button green whitetext ptop0">Ajouter au panier<i
@@ -39,7 +39,7 @@
                     <a href="/Connexion" class="pixel hvr-float green">Ajouter au panier<i
                                 class="fa fa-plus-circle fa-3x author whitetext left10p ptop20px right-15p"></i></a>
                 {% endif %}
-                <strong><p id="{{ uneConsole.ref }}" class="top10p bottom10p text15 whitetext"></p></strong>
+                <strong><p id="{{ uneConsole.ref }}" class="top10p bottom10p text15 whitetext messageStock"></p></strong>
             {% endif %}
         </div>
     {% endfor %}
@@ -53,7 +53,7 @@
                     method: "post",
                     data: "ref="+this.name,
                     success: function(data){
-                        document.getElementById(data.ref).innerHTML = data.res;
+                        $("#"+data.ref).html(data.res);
                     }
                 })
             })

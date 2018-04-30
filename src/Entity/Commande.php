@@ -3,6 +3,11 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\User;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 /**
  * Commande
@@ -22,9 +27,12 @@ class Commande
     private $idCommande;
 
     /**
-     * @var int
+     * @var \User
      *
-     * @ORM\Column(name="id_client", type="integer", nullable=false)
+     * @ORM\ManyToOne(targetEntity="User", cascade={"all"})
+     * @ORM\JoinColumns({
+     * @ORM\JoinColumn(name="id_client", referencedColumnName="id")
+     * })
      */
     private $idClient;
 
@@ -69,7 +77,7 @@ class Commande
     }
 
     /**
-     * @return int
+     * @return \User
      */
     public function getIdClient()
     {
@@ -77,9 +85,9 @@ class Commande
     }
 
     /**
-     * @param int $idClient
+     * @param User $idClient
      */
-    public function setIdClient(int $idClient)
+    public function setIdClient(User $idClient)
     {
         $this->idClient = $idClient;
     }
@@ -114,6 +122,18 @@ class Commande
     public function setPrixCommande(float $prixCommande)
     {
         $this->prixCommande = $prixCommande;
+    }
+
+    public function serialize(){
+        $encoders = array(new XmlEncoder(), new JsonEncoder());
+        $normalizers = array(new ObjectNormalizer());
+
+        $serializer = new Serializer($normalizers, $encoders);
+        return $serializer->serialize(array(
+            'Numéro' => $this->getIdCommande(),
+            'Prix' => $this->getPrixCommande(),
+            'Statut' => $this->getIdStatut()->getNom(),
+        ), 'json');
     }
 
 

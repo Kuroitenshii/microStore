@@ -75,7 +75,9 @@ class Action extends AbstractController
             $em->persist($produit);
             $em->flush();
             //redirige vers la page de succées
-            return $this->redirectToRoute('ajout-produit-succes');
+            $new = $em->getRepository(Produits::class)->findOneBy(array("nom" => $produit->getNom()));
+            $ref = $new->getRef();
+            return $this->redirect("/Modif/Stock/Produit/".$ref);
         }
 
         //affiche le formulaire

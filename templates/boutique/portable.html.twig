@@ -39,7 +39,7 @@
                                 class="fa fa-plus-circle fa-3x author whitetext left10p ptop20px right-15p"></i></a>
                 {% endif %}
             {% endif %}
-            <strong><p id="{{ uneConsole.ref }}" class="top10p bottom10p text15 whitetext" style="line-height: 22px; position: absolute"></p></strong>
+            <strong><p id="{{ uneConsole.ref }}" class="top10p bottom10p text15 whitetext messageStock"></p></strong>
         </div>
     {% endfor %}
 {% endblock %}
@@ -52,7 +52,6 @@
                     method: "post",
                     data: "ref="+this.name,
                     success: function(data){
-                        console.log(data);
                         $("#"+data.ref).html(data.res);
                     }
                 })

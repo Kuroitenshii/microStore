@@ -13,6 +13,7 @@ use App\Entity\LignesCommande;
 use App\Entity\Produits;
 use App\Entity\StatusCommande;
 use App\Entity\Stock;
+use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\Entity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -59,7 +60,7 @@ class Panier extends AbstractController
                 $info = $change . "élément(s) retiré (stock insuffisant)";
             }
 
-            // recupération et changement du nombre de produit dans le stock
+            // recupération et changement du nombre de produit dans le panier
             $articles = $em->getRepository(\App\Entity\Panier::class)->findBy(array('idClient' => $user));
             $nb = 0;
             foreach ($articles as $article) {
@@ -103,7 +104,7 @@ class Panier extends AbstractController
         $stmt = $conn->prepare($sql);
         $stmt->execute();
 
-        // recupération et changement du nombre de produit dans le stock
+        // recupération et changement du nombre de produit dans le panier
         $articles = $em->getRepository(\App\Entity\Panier::class)->findBy(array('idClient' => $user));
         $nb = 0;
         foreach ($articles as $article) {
@@ -116,7 +117,7 @@ class Panier extends AbstractController
     }
 
     /**
-     * @Route("/Panier/Valider", name="Panier-valider"
+     * @Route("/Panier/Valider", name="Panier-valider")
      * validation du panier
      */
     public
@@ -132,8 +133,9 @@ class Panier extends AbstractController
         $statut = $em->getRepository(StatusCommande::class)->findOneBy(array('idStatut' => 1));
 
         //création du nouvelle commande avec les information
+        $use = $em->getRepository(User::class)->find($user);
         $commande = new Commande();
-        $commande->setIdClient($user);
+        $commande->setIdClient($use);
         $commande->setIdStatut($statut);
         $commande->setPrixCommande($prix * 1.2);
 
@@ -164,7 +166,7 @@ class Panier extends AbstractController
         $stmt = $conn->prepare($sql);
         $stmt->execute();
 
-        // recupération et changement du nombre de produit dans le stock
+        // recupération et changement du nombre de produit dans le panier
         $articles = $em->getRepository(\App\Entity\Panier::class)->findBy(array('idClient' => $user));
         $nb = 0;
         foreach ($articles as $article) {
