@@ -6,7 +6,10 @@ security:
                 property: userName
 
     encoders:
-        App\Entity\User: plaintext
+        App\Entity\User:
+            algorithm: bcrypt
+            encode_as_base64: false
+            iterations: 13
 
     firewalls:
 

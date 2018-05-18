@@ -49,9 +49,20 @@ class Panier extends AbstractController
             foreach ($articles as $article) {
                 $stock = $em->getRepository(Stock::class)->findOneBy(array("refProduit" => $article->getRefProduit()));
                 if ($stock->getQuantiteStock() < $article->getQuantiteProduit()) {
-                    $change += $article->getQuantiteProduit() - $stock->getQuantiteStock();
-                    $article->setQuantiteProduit($stock->getQuantiteStock());
-                    $em->flush();
+                    if($stock->getQuantiteStock() == 0) {
+                        $conn = $this->getDoctrine()->getConnection();
+
+                        $sql = '
+        DELETE FROM panier
+        WHERE id_client =' . $user . '
+        AND ref_produit = ' . $article->getRefProduit()->getRef() . '
+        ';
+                        $stmt = $conn->prepare($sql);
+                        $stmt->execute();
+                    } else {
+                        $article->setQuantiteProduit($stock->getQuantiteStock());
+                        $em->flush();
+                    }
                 }
             }
 

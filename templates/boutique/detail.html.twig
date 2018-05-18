@@ -29,16 +29,16 @@
             <p class="lheight30p">{{ detail.description }}</p></p></br>
             {% if etat == "Rupture de stock" %}
                 <span class="pixel hvr-float grey width50 text18">Ajouter au panier<i
-                            class="fa fa-plus-circle fa-2x author whitetext ptop20px right-15p left10p"></i></span>
+                            class="fa fa-plus-circle fa-3x author whitetext ptop20px right-15p left10p"></i></span>
             {% else %}
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                     <button id="ajout" name="{{ detail.ref }}" class="pixel link-cursor button green whitetext ptop0 width50 text18">
                         Ajouter au panier<i
-                                class="fa fa-plus-circle fa-2x author whitetext left10p ptop20px right-15p"></i>
+                                class="fa fa-plus-circle fa-3x author whitetext left10p ptop20px right-15p"></i>
                     </button>
                 {% else %}
                     <a href="/Connexion" class="pixel hvr-float green width50 text18">Ajouter au panier<i
-                                class="fa fa-plus-circle fa-2x author whitetext left10p ptop20px right-15p"></i></a>
+                                class="fa fa-plus-circle fa-3x author whitetext left10p ptop20px right-15p"></i></a>
                 {% endif %}
             {% endif %}
             <strong><p id="fin-ajout" class="top10p bottom10p text18 whitetext"></p>
@@ -55,7 +55,7 @@
                     method: "post",
                     data: "ref="+this.name,
                     success: function(data){
-                        document.getElementById('fin-ajout').innerHTML = data;
+                        document.getElementById('fin-ajout').innerHTML = data.res;
                     }
                 })
             })

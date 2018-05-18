@@ -44,6 +44,9 @@ easy_admin:
                     - {property: 'password', type: 'text'}
                     - {property: 'email', type: 'email'}
                     - { property: 'role', type: 'choice', type_options:{choices: {'Utilisateur':'ROLE_USER', 'Admin':'ROLE_ADMIN'}}}
+                    - {property: 'adresse', type: 'text'}
+                    - {property: 'postal', type: 'integer'}
+                    - {property: 'ville', type: 'text'}
 
         Produits:
             class: App\Entity\Produits

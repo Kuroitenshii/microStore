@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
@@ -16,6 +17,7 @@ class Connexion extends AbstractController {
         //récupération de l'erreur eventuelle et du dernier username utilisé
         $erreur = $auth->getLastAuthenticationError();
         $lastUserName = $auth->getLastUsername();
+
 
         //affichage du render
         return $this->render('connexion/connexion.html.twig', array('last_username' => $lastUserName, 'error'=>$erreur));

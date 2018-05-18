@@ -116,17 +116,17 @@ class Mobile extends AbstractController
         $serializer = $this->get('serializer');
         $username = $request->get('username');
         $password = $request->get('password');
-
+        $user = $em->getRepository(User::class)->findOneBy(array('userName' => $username));
+        $hash = $user->getPassword();
         //on cherche l'utilisateur dans la base de données
-        if($em->getRepository(User::class)->findBy(array('userName' => $username, 'password' => $password))){
-            $user = $em->getRepository(User::class)->findOneBy(array('userName' => $username, 'password' => $password));
+        if(password_verify($password, $hash)){
             $data = json_encode(array("pseudo" => $user->getPseudo(), "id" => $user->getUserName()));
             $response = new Response($data);
             $response->headers->set('Content-Type', 'application/text; charset=utf-8');
             $response->headers->set('Ok', 'oui');
             return $response;
         } else {
-            $response = new JsonResponse(json_encode(array("erreur" => "identifiant ou mot de passe invalide !")));
+            $response = new Response( "identifiant ou mot de passe invalide !");
             $response->headers->set('Content-Type', 'application/json');
             $response->headers->set('Non', 'non');
             return $response;
@@ -357,5 +357,12 @@ class Mobile extends AbstractController
         $response->headers->set('Content-Type', 'application/json');
         $response->headers->set('Ok', 'oui');
         return $response;
+    }
+
+    /**
+     * @Route("/Mobile/Serveur", name="mobile/serveur")
+     */
+    public function apiTestServer(){
+        return new response("Connexion Reussi");
     }
 }
