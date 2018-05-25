@@ -35,4 +35,12 @@ class Accueil extends AbstractController
         }
         return $this->render('accueil/accueil.html.twig');
     }
+
+
+    /**
+     * @Route("/")
+     */
+    public function goAccueilController(){
+        return $this->redirectToRoute("Accueil");
+    }
 }
