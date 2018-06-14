@@ -56,7 +56,7 @@ class Profil extends AbstractController
         }
 
         //on affiche la vue twig
-        return $this->render('profil/detail-commande.html.twig', array('commande' => $lignes, "prix" => $commande->getPrixCommande(), 'numero' => $commande->getIdCommande(), 'nb' => $nb, 'etat' => $commande->getIdStatut()));
+        return $this->render('profil/detail-commande.html.twig', array('commande' => $lignes, "prix" => $commande->getPrixCommande(), 'numero' => $commande->getIdCommande(), 'nb' => $nb, 'etat' => $commande->getIdStatut(), 'date' => $commande->getDateCommande()));
     }
 
     /**
@@ -100,6 +100,8 @@ class Profil extends AbstractController
 
         //changement du statut et enregistrement
         $commande->setIdStatut($statut);
+        $date = date("Y-m-d");
+        $commande->setDateCommande("$date");
         $em->flush();
 
         //affichage du message de succès

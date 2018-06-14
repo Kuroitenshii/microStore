@@ -29,7 +29,7 @@ class User implements UserInterface, \Serializable
     /**
      * @var string
      *
-     * @ORM\Column(name="mdp", type="string", length=6, nullable=false)
+     * @ORM\Column(name="mdp", type="string", length=255, nullable=false)
      */
     private $password;
 

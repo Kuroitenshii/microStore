@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    Info Société
+{% endblock %}
+{% block body %}
+    <div class="center bottom15p">
+        <div class="center bottom15p">
+            <div class="normal-cursor bubble-speech bubble-center div-bouton bluetext noneleft text25" id="salon">
+                <i class="fa fa-question-circle fa-3x author bluetext"></i>
+                <p><strong>Liste des meilleurs client</strong></p>
+            </div>
+        </div>
+        {% for element in user %}
+            <tr>
+                <td>{{ user.id_client }}</td>
+                <td>{{ user.pseudo}}</td>
+                <td>{{ user.achat }}</td>
+            </tr>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -47,6 +47,13 @@ class Commande
     private $idStatut;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="date_commande", type="string", length=255, nullable=false)
+     */
+    private $dateCommande;
+
+    /**
      * @var float
      *
      * @ORM\Column(name="prix_commande", type="float", nullable=false)
@@ -135,6 +142,24 @@ class Commande
             'Statut' => $this->getIdStatut()->getNom(),
         ), 'json');
     }
+
+    /**
+     * @return string
+     */
+    public function getDateCommande()
+    {
+        return $this->dateCommande;
+    }
+
+    /**
+     * @param string $dateCommande
+     */
+    public function setDateCommande(string $dateCommande)
+    {
+        $this->dateCommande = $dateCommande;
+    }
+
+
 
 
 

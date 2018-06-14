@@ -12,6 +12,7 @@ easy_admin:
             - label: 'Utilisateurs'
             - { entity: 'User', icon: 'users'}
             - { label: "Reinitialiser MDP", route: "reset-password"}
+            - { label: "Meilleurs Clients", route: "meilleur"}
 
             - label: 'Produit'
             - { entity: 'Produits', label: "Liste Produit"}

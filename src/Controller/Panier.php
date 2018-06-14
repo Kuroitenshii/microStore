@@ -138,6 +138,7 @@ class Panier extends AbstractController
         $user = $this->getUser()->getUserName();
         $conn = $this->getDoctrine()->getConnection();
         $prix = $req->get('prix');
+        $date = date("Y-m-d");
 
         //récupération du panier et du statut "validé"
         $panier = $em->getRepository(\App\Entity\Panier::class)->findBy(array('idClient' => $user));
@@ -149,6 +150,7 @@ class Panier extends AbstractController
         $commande->setIdClient($use);
         $commande->setIdStatut($statut);
         $commande->setPrixCommande($prix * 1.2);
+        $commande->setDateCommande($date);
 
         //enregistrement de la commande dans la base
         $em->persist($commande);

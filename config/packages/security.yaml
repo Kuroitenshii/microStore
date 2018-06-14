@@ -38,6 +38,7 @@ security:
         - { path: ^/Info/^, roles: ROLE_ADMIN}
         - { path: ^/Reset/^, roles: ROLE_ADMIN}
         - { path: ^/Fixture, roles: ROLE_ADMIN}
+        - { path: ^/Meilleur, roles: ROLE_ADMIN}
         - { path: ^/Boutique/Ajout, roles: ROLE_USER}
         - { path: ^/Panier, roles: ROLE_USER}
 

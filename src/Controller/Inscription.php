@@ -50,7 +50,6 @@ class Inscription extends AbstractController{
             //récupération des info du formulaire, création et enregistrement de l'utilisateur dans la base
             $password = $user->generate();
             $user = $form->getData();
-            $password = $user->getPassword();
             $user->setPassword($password);
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
